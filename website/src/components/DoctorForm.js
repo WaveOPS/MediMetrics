@@ -35,7 +35,7 @@ function AddDoctorForm() {
     }
 
     axios
-      .post('http://localhost:5000/api/doctors', formData) // Adjust endpoint for doctors
+      .post('http://localhost/MediMetrics/website/submit-doctor.php', formData) // Adjust endpoint for doctors
       .then((response) => {
         console.log('Doctor added successfully:', response.data);
         handleReset(); // Reset form after submission

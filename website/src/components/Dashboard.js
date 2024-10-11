@@ -68,7 +68,7 @@ const Dashboard = () => {
                         <i className="fas fa-user-md"></i>
                         <div>
                             <h3>Doctors Registered</h3>
-                            <p>3,200</p>
+                            <p>20</p>
                         </div>
                     </div>
 
