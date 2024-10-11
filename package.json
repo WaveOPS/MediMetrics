@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "pica": "^9.0.1",
     "react-modal": "^3.16.1"
   }
 }

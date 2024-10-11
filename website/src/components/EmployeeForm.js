@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './EmployeeForm.css'; // Make sure this path is correct
+import Pica from 'pica';
 
 const EmployeeForm = () => {
     const [employee, setEmployee] = useState({ name: '', age: '', area: '', username: '', password: '' });
@@ -11,7 +12,7 @@ const EmployeeForm = () => {
     const MAX_FILE_SIZE = 5 * 1024 * 1024;
     const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/jpg'];
 
-    const handleChange = (e) => {
+    const handleChange = async (e) => {
         if (e.target.name === "photo") {
             const file = e.target.files[0];
 
@@ -29,12 +30,49 @@ const EmployeeForm = () => {
                 return;
             }
 
-            // If no error, clear the error and set the photo
-            setError('');
-            setPhoto(file);
+            // Resize the image if it's valid
+            if (file) {
+                const resizedPhoto = await resizeImage(file);
+                setError('');
+                setPhoto(resizedPhoto);
+            }
         } else {
             setEmployee({ ...employee, [e.target.name]: e.target.value });
         }
+    };
+
+    const resizeImage = (file) => {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.src = URL.createObjectURL(file);
+
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                const pica = new Pica();
+
+                // Set canvas dimensions to 800x800
+                canvas.width = 800;
+                canvas.height = 800;
+
+                // Draw the image to the canvas
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, 800, 800);
+
+                // Use pica to resize and convert to Blob
+                pica.resize(canvas, canvas)
+                    .then(result => pica.toBlob(result, 'image/jpeg', 0.9))
+                    .then(blob => {
+                        resolve(blob);
+                    })
+                    .catch(err => {
+                        reject(err);
+                    });
+            };
+
+            img.onerror = (err) => {
+                reject(err);
+            };
+        });
     };
 
     const handleSubmit = async (e) => {
