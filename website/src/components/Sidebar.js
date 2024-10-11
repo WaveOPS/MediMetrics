@@ -1,6 +1,5 @@
-// Sidebar.js
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'; // Using NavLink to apply active class to the current route
 import './Sidebar.css'; // Sidebar-specific styles
 
 const Sidebar = () => {
@@ -8,35 +7,36 @@ const Sidebar = () => {
         <div className="sidebar">
             <div className="logo">GEOMR</div>
             <ul>
-                <li className="active">
-                    <Link to="/">
+                {/* Using NavLink for active styling */}
+                <li>
+                    <NavLink exact to="/" activeClassName="active">
                         <i className="fas fa-home"></i> Dashboard
-                    </Link>
+                    </NavLink>
                 </li>
                 <li>
-                    <Link to="/employees">
+                    <NavLink to="/employees" activeClassName="active">
                         <i className="fas fa-user"></i> Employees
-                    </Link>
+                    </NavLink>
                 </li>
                 <li>
-                    <Link to="/doctors">
+                    <NavLink to="/doctors" activeClassName="active">
                         <i className="fas fa-user-md"></i> Doctors
-                    </Link>
+                    </NavLink>
                 </li>
                 <li>
-                    <Link to="/daily-reports">
+                    <NavLink to="/daily-reports" activeClassName="active">
                         <i className="fas fa-clipboard"></i> Daily Reports
-                    </Link>
+                    </NavLink>
                 </li>
                 <li>
-                    <Link to="/previous-records">
+                    <NavLink to="/previous-records" activeClassName="active">
                         <i className="fas fa-history"></i> Previous Records
-                    </Link>
+                    </NavLink>
                 </li>
                 <li>
-                    <Link to="/logout">
+                    <NavLink to="/logout" activeClassName="active">
                         <i className="fas fa-sign-out-alt"></i> Log Out
-                    </Link>
+                    </NavLink>
                 </li>
             </ul>
         </div>

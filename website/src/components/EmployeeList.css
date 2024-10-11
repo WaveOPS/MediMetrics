@@ -1,0 +1,136 @@
+/* General page layout */
+.employee-list-page {
+    padding: 20px;
+    background-color: #f7f8fa;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    color: #ffffff;
+    background-color: #3498db;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 24px;
+}
+
+/* Search bar */
+.search-bar {
+    position: relative;
+    width: 300px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    padding-left: 40px;
+}
+
+.search-bar i {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #aaa;
+}
+
+/* Add Employee Button */
+.add-employee-btn {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.add-employee-btn i {
+    font-size: 20px;
+}
+
+/* Employee table */
+.employee-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+}
+
+.employee-table th, .employee-table td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.employee-table th {
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+}
+
+.employee-table td {
+    border-bottom: 1px solid #ddd;
+}
+
+.employee-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Employee details (Clickable text) */
+.employee-name {
+    color: #3498db;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.employee-username {
+    font-size: 12px;
+    color: gray;
+}
+
+.employee-photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Action buttons */
+.action-btn {
+    background-color: #e74c3c;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.action-btn:hover {
+    background-color: #c0392b;
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search-bar {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .add-employee-btn {
+        margin-top: 10px;
+    }
+}
