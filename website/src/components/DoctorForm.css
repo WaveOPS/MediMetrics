@@ -1,0 +1,82 @@
+/* Basic styling for the form */
+.doctor-form {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .doctor-form .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .doctor-form label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .doctor-form input[type="text"],
+  .doctor-form input[type="number"],
+  .doctor-form input[type="password"],
+  .doctor-form input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .doctor-form input[type="text"]:focus,
+  .doctor-form input[type="number"]:focus,
+  .doctor-form input[type="password"]:focus,
+  .doctor-form input[type="file"]:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  .doctor-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .doctor-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  .doctor-form .form-group input[type="file"] {
+    padding: 0;
+    margin-top: 10px;
+  }
+  
+  .doctor-form .form-group label {
+    color: #343a40;
+  }
+  
+  .doctor-form button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+  }
+  
+  .doctor-form .form-group input[type="number"] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+  }
+  
+  .doctor-form .form-group input[type="number"]::-webkit-outer-spin-button,
+  .doctor-form .form-group input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }

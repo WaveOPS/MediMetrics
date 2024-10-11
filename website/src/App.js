@@ -4,6 +4,7 @@ import './App.css';
 import Header from './components/Header'; // Header component
 import Dashboard from './components/Dashboard'; // Dashboard component
 import EmployeeForm from './components/EmployeeForm'; // Employee Form component
+import DoctorForm from './components/DoctorForm';
 
 const App = () => {
     return (
@@ -16,7 +17,8 @@ const App = () => {
                     {/* Dashboard route */}
                     <Route path="/" element={<Dashboard />} />
                     {/* Employee Form route */}
-                    <Route path="/employees" element={<EmployeeForm />} />
+                    <Route path="/employeeform" element={<EmployeeForm />} />
+                    <Route path="/doctorform" element={<DoctorForm />} />
                 </Routes>
             </div>
         </Router>

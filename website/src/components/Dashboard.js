@@ -76,7 +76,7 @@ const Dashboard = () => {
                         <i className="fas fa-map-marker-alt"></i>
                         <div>
                             <h3>Active Employees</h3>
-                            <p>2,503</p>
+                            <p>09</p>
                         </div>
                     </div>
                 </div>
