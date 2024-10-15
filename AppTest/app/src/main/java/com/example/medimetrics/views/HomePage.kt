@@ -31,12 +31,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.medimetrics.Employee
 import com.example.medimetrics.R
 import com.example.medimetrics.ui.theme.MediMetricsTheme
 
 @Composable
-fun HomeScreen(employee: Employee) {
+fun HomeScreen(
+    employee: Employee,
+    navController: NavController
+) {
     Log.d("HomeScreen", "Homescreen")
     Box(Modifier.fillMaxSize()) {
         Image(
@@ -69,7 +73,7 @@ fun HomeScreen(employee: Employee) {
             Spacer(modifier = Modifier.height(10.dp))
 
             // Dashboard Icons
-            DashboardIcons()
+            DashboardIcons(navController = navController)
 
             Spacer(modifier = Modifier.height(10.dp))
 
@@ -180,7 +184,7 @@ fun MonthlyCallsCard() {
 
 
 @Composable
-fun DashboardIcons() {
+fun DashboardIcons(navController: NavController) {
     Column(
         verticalArrangement = Arrangement.Center
     ) {
@@ -192,13 +196,13 @@ fun DashboardIcons() {
                 iconRes = R.drawable.planner_icon,
                 label = "Tour Planner",
                 backgroundColor = Color(0xFFB3E5FC),
-                onClick = { /* Handle click for Tour Planner */ }
+                onClick = { navController.navigate("tourPlanner")  }
             )
             DashboardCardItem(
                 iconRes = R.drawable.selfie_icon,
                 label = "Selfie",
                 backgroundColor = Color(0xFFE0E0E0),
-                onClick = { /* Handle click for Selfie */ }
+                onClick = { }
             )
         }
 
