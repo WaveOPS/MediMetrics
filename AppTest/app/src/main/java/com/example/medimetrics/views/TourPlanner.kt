@@ -2,6 +2,7 @@ package com.example.test
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,9 +12,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -25,56 +32,61 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.medimetrics.R
+import com.example.medimetrics.components.TodayCallsCard
 import com.example.medimetrics.ui.theme.MediMetricsTheme
+import com.example.medimetrics.viewmodel.TourPlannerViewModel
 import com.example.test.components.BottomNavBar
 
 
 @Composable
-fun TourPlanner(){
+fun TourPlanner(
+    navController: NavController,
+    viewModel: TourPlannerViewModel
+){
     Column(
         modifier = Modifier.fillMaxSize().padding(top = 55.dp, start = 10.dp, end = 10.dp, bottom = 10.dp),
 
     ) {
         TodayCallsCard()
-        Spacer(modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // LazyColumn to display the list of items
+        LazyColumn(
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            items(viewModel.items) { item ->
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(Color(0xFFB2DFDB)),
+                    shape = RoundedCornerShape(8.dp)
+                ) {
+                    Text(
+                        text = item,
+                        modifier = Modifier.padding(16.dp),
+                        fontSize = 18.sp
+                    )
+                }
+            }
+        }
+
+        // "+" Button to navigate to NewItemScreen
+        IconButton(
+            onClick = { navController.navigate("newItem") },
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(16.dp)
+                .size(64.dp)
+        ) {
+            Icon(Icons.Default.Add, contentDescription = "Add Item", tint = Color(0xFFF05454))
+        }
         BottomNavBar()
     }
 }
 
-@Composable
-fun TodayCallsCard() {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(100.dp),
-        colors = CardDefaults.cardColors(Color(0xFFF05454)),
-//        backgroundColor = Color(0xFFF05454),
-        shape = RoundedCornerShape(8.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(
-                text = "Today's Target",
-                color = Color.White,
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            Text(
-                text = "3",
-                color = Color.White,
-                fontSize = 36.sp,
-                fontWeight = FontWeight.Bold
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-        }
-    }
-}
 
 
 
@@ -84,7 +96,10 @@ fun DoctorAppPreview() {
     MediMetricsTheme {
 //        TodayCallsCard()
 //        BottomNavBar()
-        TourPlanner()
+        TourPlanner(
+            navController = rememberNavController(),
+            viewModel = TourPlannerViewModel()
+            )
     }
 
 

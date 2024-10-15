@@ -16,8 +16,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.medimetrics.ui.theme.MediMetricsTheme
+import com.example.medimetrics.viewmodel.TourPlannerViewModel
 import com.example.medimetrics.views.HomeScreen
 import com.example.medimetrics.views.LoginScreen
+import com.example.medimetrics.views.NewItemScreen
 import com.example.test.TourPlanner
 
 class MainActivity : ComponentActivity() {
@@ -27,7 +29,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MediMetricsTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    TourPlanner()
+                    AppNavigation()
                 }
             }
         }
@@ -70,10 +72,33 @@ fun MyApp() {
             )
 
             // Pass employee object to HomeScreen
-            HomeScreen(employee = employee)
+            HomeScreen(employee = employee, navController)
+        }
+
+        composable("tourPlanner") {
+            TourPlanner(navController = navController, viewModel = TourPlannerViewModel())
+        }
+        composable("newItem") {
+            NewItemScreen(navController = navController, viewModel = TourPlannerViewModel())
         }
     }
 }
+
+
+@Composable
+fun AppNavigation(viewModel: TourPlannerViewModel = TourPlannerViewModel()) {
+    val navController = rememberNavController()
+
+    NavHost(navController, startDestination = "tourPlanner") {
+        composable("tourPlanner") {
+            TourPlanner(navController = navController, viewModel = viewModel)
+        }
+        composable("newItem") {
+            NewItemScreen(navController = navController, viewModel = viewModel)
+        }
+    }
+}
+
 
 // A placeholder data class for Employee
 data class Employee(
