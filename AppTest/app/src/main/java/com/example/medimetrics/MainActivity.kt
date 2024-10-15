@@ -18,6 +18,7 @@ import androidx.navigation.navArgument
 import com.example.medimetrics.ui.theme.MediMetricsTheme
 import com.example.medimetrics.views.HomeScreen
 import com.example.medimetrics.views.LoginScreen
+import com.example.test.TourPlanner
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +27,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MediMetricsTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    MyApp()
+                    TourPlanner()
                 }
             }
         }
