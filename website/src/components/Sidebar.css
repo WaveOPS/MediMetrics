@@ -1,4 +1,4 @@
-/* Sidebar.css */
+Sidebar.css
 .app-container {
     display: flex;
 }
@@ -6,17 +6,17 @@
 .sidebar {
     width: 250px;
     height: 100vh;
-    position: fixed; /* Keep it static (fixed) on the left */
+    position: fixed; 
     top: 0;
     left: 0;
     background-color: #ffffff;
     color: white;
     padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2); 
 }
 
 .main-content {
-    margin-left: 250px; /* To accommodate the sidebar */
+    margin-left: 110px; 
     padding: 20px;
     width: calc(100% - 250px);
     height: 100vh;

@@ -4,97 +4,111 @@ body {
     padding: 0;
     font-family: 'Arial', sans-serif;
     background-color: #1a1a1a;
-  }
-  
-  /* Container for the dashboard */
-  .dashboard-container {
+}
+
+/* Container for the dashboard */
+.dashboard-container {
     display: flex;
     height: 100vh;
-  }
+}
+
+ Sidebar Styles
+.sidebar {
   
-  /* Sidebar Styles */
-  .sidebar {
     width: 250px;
     background-color: #ffffff;
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .sidebar .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
+}
+
+.sidebar .logo {
+    font-size: 1.7rem;
+    font-weight: 800;
     color: #3a7bd5;
     margin-bottom: 50px;
     text-align: center;
-  }
-  
-  .sidebar ul {
+    margin-top: 20px;
+}
+
+.sidebar ul {
     list-style: none;
     padding: 0;
-  }
-  
-  .sidebar ul li {
+    margin-top:-20px;
+}
+
+.sidebar ul li {
     padding: 15px 20px;
     display: flex;
     align-items: center;
     color: #4f4f4f;
     cursor: pointer;
-  }
-  
-  .sidebar ul li.active,
-  .sidebar ul li:hover {
+}
+
+.sidebar ul li.active,
+.sidebar ul li:hover {
     background-color: #f1f1f1;
     border-radius: 8px;
     color: #333;
-  }
-  
-  .sidebar ul li i {
+}
+
+.sidebar ul li i {
     margin-right: 10px;
-  }
-  
-  /* Main Content Styles */
-  .main-content {
+}
+
+/* Main Content Styles */
+.main-content {
+  margin-left: 40px;
     flex-grow: 1;
-    background-color: #f7f7f7;
-    padding: 20px;
-  }
+    background-color: #ffffff;
+    /*padding: 20px;*/
+    
   
-  header h2 {
+}
+
+/* Title Styles */
+header h2 {
     font-size: 1.8rem;
     color: #333;
-    margin-bottom: 20px;
-  }
-  
-  /* Stats Cards */
-  .stats-cards {
+    margin-bottom: 30px;
+    margin-left: 130px; 
+    margin-top: 10px;
+}
+
+/* Stats Cards */
+.stats-cards {
     display: flex;
     justify-content: space-between;
-  }
-  
-  .card {
+    gap: 20px; /* Add space between cards */
+    padding: 0 20px; /* Add horizontal padding to the container */
+    margin-left: 110px;
+}
+
+.card {
     background-color: #3a7bd5;
-    color: white;
-    border-radius: 10px;
-    padding: 20px;
-    width: 30%;
-    display: flex;
-    align-items: center;
+    color: rgb(255, 255, 255);
+    border-radius: 20px;
+    padding: 15px;
+    flex: 1; /* Allow cards to grow and take available space */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .card i {
-    font-size: 2.5rem;
-    margin-right: 20px;
-  }
-  
-  .card h3 {
+    margin: 0; /* Remove margin for cards */
+    height: 100px; /* Adjust height as needed */
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    transition: transform 0.2s; /* Add hover effect */
+}
+
+.card div {
+    text-align: center; /* Center text within the div */
+}
+
+.card h3 {
     margin: 0;
     font-size: 1.2rem;
-  }
-  
-  .card p {
+}
+
+.card p {
     font-size: 1.5rem;
-    margin-top: 10px;
+    margin-top: 5px; /* Adjusted margin for better spacing */
     font-weight: bold;
-  }
-  
+}

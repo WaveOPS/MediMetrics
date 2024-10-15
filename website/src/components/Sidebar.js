@@ -5,7 +5,7 @@ import './Sidebar.css'; // Sidebar-specific styles
 const Sidebar = () => {
     return (
         <div className="sidebar">
-            <div className="logo">GEOMR</div>
+            <div className="logo">MEDIMETRICS</div>
             <ul>
                 {/* Using NavLink for active styling */}
                 <li>
