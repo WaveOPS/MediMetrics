@@ -14,6 +14,8 @@ import java.io.IOException
 
 class LoginViewModel : ViewModel() {
 
+    var isViewInited = mutableStateOf(false)
+
     var loginStatus = mutableStateOf<String>("")
     var employeeData = mutableStateOf<Employee?>(null)
 

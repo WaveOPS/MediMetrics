@@ -105,7 +105,12 @@ fun LoginScreen(
 
                 // Navigate on login success
                 when (loginStatus) {
-                    "success" -> employeeData?.let { onLoginSuccess(it) }
+                    "success" -> employeeData?.let {
+                        if (!loginViewModel.isViewInited.value) {
+                            loginViewModel.isViewInited.value = true
+                            onLoginSuccess(it)
+                        }
+                    }
                     "failure" -> Text("Invalid username or password", color = Color.Red)
                     "error" -> Text("Error connecting to server", color = Color.Red)
                 }
