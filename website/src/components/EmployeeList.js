@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './EmployeeList.css';
+import EmployeeForm from './EmployeeForm'; // Import the form
 
 const EmployeeList = () => {
     const [employees, setEmployees] = useState([]);
+    const [showForm, setShowForm] = useState(false); // State to toggle form visibility
 
     // Fetch employees from the backend
     useEffect(() => {
-        fetch('http://localhost/MediMetrics/website/get-employees.php') // Update with your actual PHP URL
+        fetch('http://localhost/MediMetrics/website/get-employees.php')
             .then((response) => response.json())
             .then((data) => {
                 setEmployees(data); // Set the employee data in state
@@ -15,6 +17,11 @@ const EmployeeList = () => {
                 console.error('Error fetching employee data:', error);
             });
     }, []);
+
+    // Function to toggle the form visibility
+    const toggleForm = () => {
+        setShowForm(!showForm);
+    };
 
     return (
         <div className="employee-list-page">
@@ -29,7 +36,7 @@ const EmployeeList = () => {
                     <input type="text" placeholder="Search employees..." />
                 </div>
 
-                <button className="add-employee-btn">
+                <button className="add-employee-btn" onClick={toggleForm}>
                     <i className="fas fa-plus"></i> Add
                 </button>
             </div>
@@ -45,10 +52,10 @@ const EmployeeList = () => {
                 </thead>
                 <tbody>
                     {employees.map((employee) => (
-                        <tr key={employee.id}> {/* Assuming 'id' is the unique identifier */}
+                        <tr key={employee.id}>
                             <td>
                                 <div className="employee-info">
-                                    <img src={employee.photo}  className="employee-photo" />
+                                    <img src={employee.photo} className="employee-photo"  />
                                     <div>
                                         <span className="employee-name">{employee.name}</span>
                                         <br />
@@ -65,6 +72,16 @@ const EmployeeList = () => {
                     ))}
                 </tbody>
             </table>
+
+            {/* Show the EmployeeForm as an overlay if showForm is true */}
+            {showForm && (
+                <div className="form-overlay">
+                    <div className="overlay-content">
+                        <EmployeeForm />
+                        <button className="close-btn" onClick={toggleForm}>Close</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
