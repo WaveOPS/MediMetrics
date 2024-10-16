@@ -3,6 +3,7 @@ package com.example.medimetrics.views
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,22 +32,28 @@ fun NewItemScreen(
     navController: NavController,
     viewModel: TourPlannerViewModel
 ) {
-    val doctorList by viewModel.doctorList.collectAsState()
-
-    LaunchedEffect(Unit) {
-        viewModel.fetchDoctors()
-    }
-
-    LazyColumn(
+    Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+            .padding(top = 35.dp)
     ) {
-        items(doctorList) { doctor ->
-            DoctorItem(doctor) {
-                viewModel.addItem("${doctor.dr_name} - ${doctor.dr_area}")
-                navController.popBackStack()
+        val doctorList by viewModel.doctorList.collectAsState()
+
+        LaunchedEffect(Unit) {
+            viewModel.fetchDoctors()
+        }
+
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            items(doctorList) { doctor ->
+                DoctorItem(doctor) {
+                    viewModel.addItem("${doctor.dr_name} - ${doctor.dr_area}")
+                    navController.popBackStack()
+                }
             }
         }
     }
@@ -60,11 +67,13 @@ fun DoctorItem(doctor: Doctor, onClick: () -> Unit) {
             .clickable(onClick = onClick)
             .padding(8.dp)
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = doctor.dr_name, fontWeight = FontWeight.Bold, fontSize = 18.sp)
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(text = doctor.dr_specialization, fontSize = 14.sp)
-            Spacer(modifier = Modifier.height(4.dp))
+        Row(modifier = Modifier.padding(16.dp)) {
+            Column() {
+                Text(text = doctor.dr_name, fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(text = doctor.dr_specialization, fontSize = 14.sp)
+            }
+            Spacer(modifier = Modifier.weight(1f))
             Text(text = doctor.dr_area, fontSize = 12.sp)
         }
     }
