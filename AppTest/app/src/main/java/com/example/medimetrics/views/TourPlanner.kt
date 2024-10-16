@@ -25,9 +25,12 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -85,8 +88,10 @@ fun TourPlanner(
                 Text(
                     text = "Today's Visits",
                     fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
                     modifier = Modifier
-                        .align(Alignment.CenterVertically),
+                        .align(Alignment.CenterVertically)
+                        .padding(8.dp),
                     textAlign = TextAlign.Start
                 )
 
@@ -114,11 +119,13 @@ fun TourPlanner(
             Spacer(modifier = Modifier.height(16.dp))
 
             // LazyColumn to display list of items
+            val items by viewModel.items.collectAsState()
+
             LazyColumn(
                 modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                items(viewModel.items) { item ->
+                items(items) { item ->
                     Card(
                         modifier = Modifier.fillMaxWidth(),
                         colors = CardDefaults.cardColors(Color(0xFFB2DFDB)),
