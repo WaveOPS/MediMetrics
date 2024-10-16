@@ -13,8 +13,19 @@ Sidebar.css
     color: white;
     padding: 20px;
     box-shadow: 4px 0 15px rgba(19, 18, 18, 0.2); 
+
+    
 }
 
+.sidebar ul li{
+    text-decoration: none;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    color: #403c3c;
+    cursor: pointer;
+    margin-top: 20px;
+}
 .main-content {
     margin-left: 110px; 
     padding: 20px;

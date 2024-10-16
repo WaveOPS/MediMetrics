@@ -33,15 +33,19 @@ body {
 .sidebar ul {
     list-style: none;
     padding: 0;
-    margin-top:-20px;
+    margin-top: 20px;
+    
+    
 }
 
 .sidebar ul li {
     padding: 15px 20px;
     display: flex;
     align-items: center;
-    color: #4f4f4f;
+    color: #403c3c;
     cursor: pointer;
+    margin-top: 20px;
+    
 }
 
 .sidebar ul li.active,
@@ -52,7 +56,8 @@ body {
 }
 
 .sidebar ul li i {
-    margin-right: 10px;
+    margin-right: 50px;
+    
 }
 
 /* Main Content Styles */
@@ -71,8 +76,8 @@ header h2 {
     font-size: 1.8rem;
     color: #333;
     margin-bottom: 30px;
-    margin-left: 130px; 
-    margin-top: 10px;
+    margin-left: 70px; 
+    margin-top: 40px;
 }
 
 /* Stats Cards */
@@ -81,7 +86,7 @@ header h2 {
     justify-content: space-between;
     gap: 20px; /* Add space between cards */
     padding: 0 20px; /* Add horizontal padding to the container */
-    margin-left: 110px;
+    margin-left: 70px;
 }
 
 .card {
