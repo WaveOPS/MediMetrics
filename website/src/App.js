@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard'; // Dashboard component
 import EmployeeList from './components/EmployeeList'; // Employee List component
 import DoctorForm from './components/DoctorForm'; // Doctor Form component
 import Sidebar from './components/Sidebar'; // Sidebar component
+import EmployeeForm from './components/EmployeeForm';
 
 const App = () => {
     return (
@@ -21,6 +22,7 @@ const App = () => {
                         {/* Employee List route */}
                         <Route path="/employees" element={<EmployeeList />} />
                         {/* Doctor Form route */}
+                        <Route path="/employeeform" element={<EmployeeForm />} />
                         <Route path="/doctors" element={<DoctorForm />} />
                     </Routes>
                 </div>

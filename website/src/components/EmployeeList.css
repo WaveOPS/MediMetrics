@@ -2,28 +2,34 @@
 .employee-list-page {
     padding: 20px;
     background-color: #f7f8fa;
-    margin-left: 200px;
+    margin-left: 160px;
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: 20px;
 }
 
 .header h1 {
-    color: #ffffff;
-    background-color: #3498db;
+    color: #140d0d;
     padding: 10px 20px;
     border-radius: 8px;
-    font-size: 24px;
+    font-size: 1.8rem;
+    margin-left:-10px;
+}
+
+/* New container for search bar and Add button */
+.search-add-container {
+    display: flex;
+    justify-content: space-between;  /* Align search bar and button side by side */
+    align-items: center;
+    margin-top: 20px;
+    margin-left:4px;
 }
 
 /* Search bar */
 .search-bar {
     position: relative;
-    width: 300px;
+    width: 600px;
 }
 
 .search-bar input {
@@ -44,17 +50,23 @@
 
 /* Add Employee Button */
 .add-employee-btn {
-    background-color: #3498db;
+    display: flex;                
+    align-items: center;         
+    justify-content: center;     
+    background-color: #3a7bd5;
+    border-radius: 20px;
     color: white;
-    padding: 10px 15px;
-    border-radius: 50%;
     border: none;
     cursor: pointer;
     font-size: 16px;
+    height: 45px;                 /* Adjusted height for better alignment */
+    width: 90px;                 /* Adjusted width */
+    margin-left: 20px;            /* Space between search bar and button */
 }
 
 .add-employee-btn i {
     font-size: 20px;
+    margin-right: 5px;          
 }
 
 /* Employee table */
@@ -65,6 +77,7 @@
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
 }
 
 .employee-table th, .employee-table td {
@@ -73,7 +86,7 @@
 }
 
 .employee-table th {
-    background-color: #3498db;
+    background-color: #3a7bd5;
     color: white;
     font-weight: bold;
 }
@@ -122,6 +135,11 @@
 
 @media screen and (max-width: 768px) {
     .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .search-add-container {
         flex-direction: column;
         align-items: flex-start;
     }
