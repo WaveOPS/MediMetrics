@@ -19,15 +19,19 @@ const EmployeeList = () => {
     return (
         <div className="employee-list-page">
             <div className="header">
-                <h1>Employees</h1>
-                <button className="add-employee-btn">
-                    <i className="fas fa-plus"></i> Add Employees
-                </button>
+                <h1>EMPLOYEES</h1>
             </div>
 
-            <div className="search-bar">
-                <i className="fas fa-search"></i>
-                <input type="text" placeholder="Search employees..." />
+            {/* New container for search bar and Add button */}
+            <div className="search-add-container">
+                <div className="search-bar">
+                    <i className="fas fa-search"></i>
+                    <input type="text" placeholder="Search employees..." />
+                </div>
+
+                <button className="add-employee-btn">
+                    <i className="fas fa-plus"></i> Add
+                </button>
             </div>
 
             <table className="employee-table">
@@ -44,7 +48,7 @@ const EmployeeList = () => {
                         <tr key={employee.id}> {/* Assuming 'id' is the unique identifier */}
                             <td>
                                 <div className="employee-info">
-                                    <img src={employee.photo} alt={employee.name} className="employee-photo" />
+                                    <img src={employee.photo}  className="employee-photo" />
                                     <div>
                                         <span className="employee-name">{employee.name}</span>
                                         <br />
