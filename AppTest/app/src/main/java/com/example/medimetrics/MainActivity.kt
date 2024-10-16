@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavType
@@ -29,7 +30,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MediMetricsTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    AppNavigation()
+                    MyApp()
                 }
             }
         }
@@ -40,6 +41,9 @@ class MainActivity : ComponentActivity() {
 fun MyApp() {
     // Setting up NavController
     val navController = rememberNavController()
+
+    val tourPlannerViewModel = remember { TourPlannerViewModel() }
+
 
     NavHost(navController, startDestination = "login") {
         // Login screen composable
@@ -76,10 +80,10 @@ fun MyApp() {
         }
 
         composable("tourPlanner") {
-            TourPlanner(navController = navController, viewModel = TourPlannerViewModel())
+            TourPlanner(navController = navController, viewModel = tourPlannerViewModel)
         }
         composable("newItem") {
-            NewItemScreen(navController = navController, viewModel = TourPlannerViewModel())
+            NewItemScreen(navController = navController, viewModel = tourPlannerViewModel)
         }
     }
 }
