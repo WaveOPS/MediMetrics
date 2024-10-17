@@ -69,7 +69,7 @@ const EmployeeList = () => {
                                 </div>
                             </td>
                             <td>{employee.area}</td>
-                            <td>{employee.employee_id}</td>
+                            <td>{employee.id}</td> {/* Changed to employee.id */}
                             <td>
                                 <button className="action-btn">Delete</button>
                             </td>
