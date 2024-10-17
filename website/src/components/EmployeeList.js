@@ -55,7 +55,12 @@ const EmployeeList = () => {
                         <tr key={employee.id}>
                             <td>
                                 <div className="employee-info">
-                                    <img src={employee.photo} className="employee-photo"  />
+                                    {/* Use the full URL for the photo by prepending the server path */}
+                                    <img 
+                                        src={`http://localhost/MediMetrics/website/${employee.photo}`} 
+                                        alt="Employee" 
+                                        className="employee-photo" 
+                                    />
                                     <div>
                                         <span className="employee-name">{employee.name}</span>
                                         <br />
