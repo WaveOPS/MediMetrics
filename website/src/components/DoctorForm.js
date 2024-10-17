@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './DoctorForm.css';  // You can use similar CSS as employee form
+import './DoctorForm.css';  // You can use similar CSS as the employee form
 
 function AddDoctorForm() {
   const [doctorData, setDoctorData] = useState({
@@ -13,9 +13,11 @@ function AddDoctorForm() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    
+    // For fullName, update the state without "Dr. " prefix
     setDoctorData({
       ...doctorData,
-      [name]: value,
+      [name]: name === 'fullName' ? value.replace(/^Dr\. /, '') : value,
     });
   };
 
@@ -29,9 +31,15 @@ function AddDoctorForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Add prefix "Dr. " to the fullName for submission
+    const formattedFullName = `Dr. ${doctorData.fullName}`;
+
     const formData = new FormData();
+    formData.append('fullName', formattedFullName); // Use the formatted name
     for (const key in doctorData) {
-      formData.append(key, doctorData[key]);
+      if (key !== 'fullName') {
+        formData.append(key, doctorData[key]);
+      }
     }
 
     axios
@@ -62,7 +70,7 @@ function AddDoctorForm() {
         <input
           type="text"
           name="fullName"
-          value={doctorData.fullName}
+          value={`Dr. ${doctorData.fullName}`} // Show "Dr. " in the input
           onChange={handleChange}
           required
         />
