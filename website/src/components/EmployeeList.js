@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './EmployeeList.css';
-import EmployeeForm from './EmployeeForm'; // Import the form
+import EmployeeForm from './EmployeeForm';
 
 const EmployeeList = () => {
     const [employees, setEmployees] = useState([]);
     const [showForm, setShowForm] = useState(false); // State to toggle form visibility
+    const overlayRef = useRef(null); // Create a reference for the overlay
 
     // Fetch employees from the backend
     useEffect(() => {
         fetch('http://localhost/MediMetrics/website/get-employees.php')
             .then((response) => response.json())
             .then((data) => {
-                setEmployees(data); // Set the employee data in state
+                setEmployees(data);
             })
             .catch((error) => {
                 console.error('Error fetching employee data:', error);
@@ -23,13 +24,32 @@ const EmployeeList = () => {
         setShowForm(!showForm);
     };
 
+    // Close form when clicking outside the form
+    const handleClickOutside = (event) => {
+        if (overlayRef.current && !overlayRef.current.contains(event.target)) {
+            setShowForm(false);
+        }
+    };
+
+    // Add event listener for clicks when the form is open
+    useEffect(() => {
+        if (showForm) {
+            document.addEventListener('mousedown', handleClickOutside);
+        } else {
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
+        // Cleanup event listener on component unmount or form close
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [showForm]);
+
     return (
         <div className="employee-list-page">
             <div className="header">
                 <h1>EMPLOYEES</h1>
             </div>
 
-            {/* New container for search bar and Add button */}
             <div className="search-add-container">
                 <div className="search-bar">
                     <i className="fas fa-search"></i>
@@ -55,7 +75,6 @@ const EmployeeList = () => {
                         <tr key={employee.id}>
                             <td>
                                 <div className="employee-info">
-                                    {/* Use the full URL for the photo by prepending the server path */}
                                     <img 
                                         src={`http://localhost/MediMetrics/website/${employee.photo}`} 
                                         alt="Employee" 
@@ -69,7 +88,7 @@ const EmployeeList = () => {
                                 </div>
                             </td>
                             <td>{employee.area}</td>
-                            <td>{employee.id}</td> {/* Changed to employee.id */}
+                            <td>{employee.id}</td>
                             <td>
                                 <button className="action-btn">Delete</button>
                             </td>
@@ -78,10 +97,9 @@ const EmployeeList = () => {
                 </tbody>
             </table>
 
-            {/* Show the EmployeeForm as an overlay if showForm is true */}
             {showForm && (
                 <div className="form-overlay">
-                    <div className="overlay-content">
+                    <div className="overlay-content" ref={overlayRef}>
                         <EmployeeForm />
                         <button className="close-btn" onClick={toggleForm}>Close</button>
                     </div>
