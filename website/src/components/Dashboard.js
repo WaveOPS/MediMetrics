@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'; 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Dashboard.css';
 import './Sidebar.css';
+import './img/bg2_app.png'
+
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 const Dashboard = () => {
     const [employeeCount, setEmployeeCount] = useState(0);
@@ -33,8 +37,10 @@ const Dashboard = () => {
                     <div className="card">
                         <i className="fas fa-users"></i>
                         <div>
-                            <h3>Total Employees</h3>
+                        
+                            <h3>Total Employees  </h3>
                             <p>{employeeCount}</p> {/* Display dynamic employee count */}
+                            
                         </div>
                     </div>
 

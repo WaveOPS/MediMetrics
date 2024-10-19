@@ -6,6 +6,7 @@ import EmployeeList from './components/EmployeeList'; // Employee List component
 import DoctorForm from './components/DoctorForm'; // Doctor Form component
 import Sidebar from './components/Sidebar'; // Sidebar component
 import EmployeeForm from './components/EmployeeForm';
+import DoctorsDashboard from './components/DoctorsDashboard';
 
 const App = () => {
     return (
@@ -23,9 +24,9 @@ const App = () => {
                         <Route path="/employees" element={<EmployeeList />} />
                         {/* Doctor Form route */}
                         <Route path="/employeeform" element={<EmployeeForm />} />
-                        <Route path="/doctors" element={<DoctorForm />} />
+                        {/* <Route path="/doctors" element={<DoctorsDashboard/>} /> */}
                         <Route path="/employeeform" element={<EmployeeForm />} />
-
+                        {/* <Route path="/doctorform" element={<DoctorForm/>} /> */}
 
                     
                     </Routes>
