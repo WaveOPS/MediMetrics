@@ -77,7 +77,6 @@ const EmployeeList = () => {
                                 <div className="employee-info">
                                     <img 
                                         src={`http://localhost/MediMetrics/website/${employee.photo}`} 
-                                        alt="Employee" 
                                         className="employee-photo" 
                                     />
                                     <div>
@@ -90,7 +89,35 @@ const EmployeeList = () => {
                             <td>{employee.area}</td>
                             <td>{employee.id}</td>
                             <td>
-                                <button className="action-btn">Delete</button>
+                                <button
+                                    className="action-btn"
+                                    onClick={() => {
+                                        if (window.confirm("Are you sure you want to delete this employee?")) {
+                                            fetch(`http://localhost/MediMetrics/website/delete-employee.php`, {
+                                                method: 'DELETE',
+                                                headers: {
+                                                    'Content-Type': 'application/x-www-form-urlencoded'
+                                                },
+                                                body: `id=${employee.id}`
+                                            })
+                                            .then(response => response.json())
+                                            .then(data => {
+                                                if (data.status === 'success') {
+                                                    // Update the employee list or handle success
+                                                    console.log(data.message);
+                                                    setEmployees(employees.filter(emp => emp.id !== employee.id));
+                                                } else {
+                                                    console.error('Error deleting employee:', data.message);
+                                                }
+                                            })
+                                            .catch(error => {
+                                                console.error('Error deleting employee:', error);
+                                            });
+                                        }
+                                    }}
+                                >
+                                    Delete
+                                </button>
                             </td>
                         </tr>
                     ))}
