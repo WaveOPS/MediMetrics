@@ -16,6 +16,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -128,14 +129,13 @@ fun TourPlanner(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(16.dp)
             ) {
                 LazyColumn(
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     items(selectedDoctors) { doctor ->
                         DoctorCard(doctor = doctor) {
-                            // You can add logic to remove a doctor if needed
+                            viewModel.removeDoctorFromTour(doctor = doctor)
                         }
                     }
                 }
@@ -145,19 +145,34 @@ fun TourPlanner(
 }
 
 @Composable
-fun DoctorCard(doctor: Doctor, onClick: () -> Unit) {
+fun DoctorCard(doctor: Doctor, onRemoveClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp)
-            .clickable { onClick() },
+            .padding(8.dp),
         elevation = CardDefaults.cardElevation(8.dp)
     ) {
-        Column(modifier = Modifier.padding(16.dp)) {
-            Text(text = doctor.dr_name, style = MaterialTheme.typography.titleLarge)
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(text = "Specialty: ${doctor.dr_specialization}")
-            Text(text = "Area: ${doctor.dr_area}")
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Column {
+                Text(text = doctor.dr_name, style = MaterialTheme.typography.titleLarge)
+                Text(text = "Specialty: ${doctor.dr_specialization}")
+                Text(text = "Area: ${doctor.dr_area}")
+            }
+
+            Icon(
+                imageVector = Icons.Default.Delete,
+                contentDescription = "Remove Doctor",
+                tint = Color.Red,
+                modifier = Modifier
+                    .size(24.dp)
+                    .clickable { onRemoveClick() } // Trigger removal on click
+            )
         }
     }
 }
