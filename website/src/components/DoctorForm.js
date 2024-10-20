@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './DoctorForm.css';  // You can use similar CSS as the employee form
+import LocationPicker from './LocationPicker'; // Import the LocationPicker component
+import './DoctorForm.css';
+import './LocationPicker.css'; // Import CSS for LocationPicker if necessary
 
 function AddDoctorForm() {
   const [doctorData, setDoctorData] = useState({
@@ -11,13 +13,15 @@ function AddDoctorForm() {
     photo: null,
   });
 
+  const [selectedLat, setSelectedLat] = useState(null);
+  const [selectedLng, setSelectedLng] = useState(null);
+  const [isMapVisible, setIsMapVisible] = useState(false); // State to control map visibility
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
-    // For fullName, update the state without "Dr. " prefix
     setDoctorData({
       ...doctorData,
-      [name]: name === 'fullName' ? value.replace(/^Dr\. /, '') : value,
+      [name]: value,
     });
   };
 
@@ -28,39 +32,37 @@ function AddDoctorForm() {
     });
   };
 
+  const handleLocationSelect = (lat, lng) => {
+    setSelectedLat(lat);
+    setSelectedLng(lng);
+    setIsMapVisible(false); // Hide the map after selection
+  };
+
+  const handleMapToggle = () => {
+    setIsMapVisible(!isMapVisible); // Toggle map visibility
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Add prefix "Dr. " to the fullName for submission
     const formattedFullName = `Dr. ${doctorData.fullName}`;
 
     const formData = new FormData();
-    formData.append('fullName', formattedFullName); // Use the formatted name
+    formData.append('fullName', formattedFullName);
     for (const key in doctorData) {
-      if (key !== 'fullName') {
-        formData.append(key, doctorData[key]);
-      }
+      formData.append(key, doctorData[key]);
     }
+    formData.append('latitude', selectedLat);
+    formData.append('longitude', selectedLng);
 
     axios
-      .post('http://localhost/MediMetrics/website/submit-doctor.php', formData) // Adjust endpoint for doctors
+      .post('http://localhost/MediMetrics/website/submit-doctor.php', formData)
       .then((response) => {
         console.log('Doctor added successfully:', response.data);
-        handleReset(); // Reset form after submission
+        // Handle successful submission (reset form, show message, etc.)
       })
       .catch((error) => {
         console.error('There was an error adding the doctor!', error);
       });
-  };
-
-  const handleReset = () => {
-    setDoctorData({
-      fullName: '',
-      age: '',
-      area: '',
-      specialization: '',
-      photo: null,
-    });
   };
 
   return (
@@ -70,7 +72,7 @@ function AddDoctorForm() {
         <input
           type="text"
           name="fullName"
-          value={`Dr. ${doctorData.fullName}`} // Show "Dr. " in the input
+          value={doctorData.fullName}
           onChange={handleChange}
           required
         />
@@ -113,6 +115,30 @@ function AddDoctorForm() {
           required
         />
       </div>
+
+      <div className="form-group">
+        <label>Choose Location:</label>
+        <button type="button" onClick={handleMapToggle}>
+          {isMapVisible ? 'Hide Map' : 'Select Location'}
+        </button>
+      </div>
+
+      {/* Show the map when isMapVisible is true */}
+      {isMapVisible && (
+        <div className="map-container">
+          <LocationPicker onLocationSelect={handleLocationSelect} />
+        </div>
+      )}
+
+      {/* Display the selected latitude and longitude below */}
+      {selectedLat !== null && selectedLng !== null && (
+        <div className="location-display">
+          <p>Selected Location:</p>
+          <p>Latitude: {selectedLat}</p>
+          <p>Longitude: {selectedLng}</p>
+        </div>
+      )}
+
       <button type="submit">Add Doctor</button>
     </form>
   );

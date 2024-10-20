@@ -1,0 +1,12 @@
+/* LocationPicker.css */
+.map-container {
+    height: 400px; /* Adjust the height as necessary */
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .leaflet-container {
+    height: 100%;
+    width: 100%;
+  }
+  

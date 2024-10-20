@@ -39,10 +39,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $age = $_POST['age'] ?? '';
     $area = $_POST['area'] ?? '';
     $specialization = $_POST['specialization'] ?? '';
+    $latitude = $_POST['latitude'] ?? null; // New: Get latitude
+    $longitude = $_POST['longitude'] ?? null; // New: Get longitude
 
     // Validate input data
     if (empty($fullName) || empty($age) || empty($area) || empty($specialization)) {
         $response['error'] = "All fields are required.";
+    } elseif ($latitude === null || $longitude === null) { // New: Validate location data
+        $response['error'] = "Location data is required.";
     } else {
         // File upload handling
         if (isset($_FILES['photo'])) {
@@ -85,12 +89,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 // Try to upload file
                 if (move_uploaded_file($photo["tmp_name"], $targetFile)) {
-                    // Prepare SQL statement
-                    $stmt = $conn->prepare("INSERT INTO doctor (dr_name, dr_age, dr_area, dr_specialization, dr_photo) VALUES (?, ?, ?, ?, ?)");
+                    // Prepare SQL statement to insert doctor data along with latitude and longitude
+                    $stmt = $conn->prepare("INSERT INTO doctor (dr_name, dr_age, dr_area, dr_specialization, dr_photo, latitude, longitude) VALUES (?, ?, ?, ?, ?, ?, ?)");
                     if ($stmt === false) {
                         $response['error'] = "SQL Prepare Error: " . $conn->error;
                     } else {
-                        $stmt->bind_param("sisss", $fullName, $age, $area, $specialization, $targetFile);
+                        $stmt->bind_param("sisssss", $fullName, $age, $area, $specialization, $targetFile, $latitude, $longitude); // New: Bind latitude and longitude
 
                         if ($stmt->execute()) {
                             $response['success'] = "Doctor added successfully: " . htmlspecialchars($fullName);
