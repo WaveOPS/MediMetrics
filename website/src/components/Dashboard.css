@@ -10,6 +10,7 @@ body {
 .dashboard-container {
     display: flex;
     height: 100vh;
+    /* margin-left: 200px; */
 }
 
  Sidebar Styles
@@ -62,11 +63,15 @@ body {
 
 /* Main Content Styles */
 .main-content {
-  margin-left: 100px;
+
     flex-grow: 1;
-    background-image: url(./img/bg2_app.png);
-    margin-top:-10px;
+    /* background-image: url(./img/bg2_app.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; */
+    margin-top: -10px;
     padding: 20px;
+
     
   
 }

@@ -67,6 +67,7 @@ function AddDoctorForm() {
 
   return (
     <form className="doctor-form" onSubmit={handleSubmit}>
+      {/* <h2>Doctor Form</h2> */}
       <div className="form-group">
         <label>Full Name:</label>
         <input
@@ -87,14 +88,7 @@ function AddDoctorForm() {
           required
         />
       </div>
-      <div className="form-group">
-        <label>Photo:</label>
-        <input
-          type="file"
-          name="photo"
-          onChange={handleFileChange}
-        />
-      </div>
+     
       <div className="form-group">
         <label>Area:</label>
         <input
@@ -139,6 +133,14 @@ function AddDoctorForm() {
         </div>
       )}
 
+      <div className="form-group">
+        <label>Photo:</label>
+        <input
+          type="file"
+          name="photo"
+          onChange={handleFileChange}
+        />
+      </div>
       <button type="submit">Add Doctor</button>
     </form>
   );

@@ -1,7 +1,6 @@
 package com.example.test
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.DragInteraction
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,7 +27,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -51,16 +49,17 @@ import com.example.test.components.BottomNavBar
 @Composable
 fun TourPlanner(
     navController: NavController,
-    viewModel: TourPlannerViewModel
+    viewModel: TourPlannerViewModel,
+    empId: Int
 ) {
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { navController.navigate("newItem") },
+                onClick = { navController.navigate("doctorList") },
                 containerColor = Color(0xFFF05454),
                 shape = RoundedCornerShape(26.dp),
                 modifier = Modifier
-                    .padding(16.dp)
+                    .padding(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 70.dp)
                     .size(75.dp)
             ) {
                 Icon(
@@ -105,7 +104,7 @@ fun TourPlanner(
                 // Capsule Submit Button
                 Button(
                     onClick = {
-                        // Handle submit action
+                        viewModel.submitTourPlan(employeeId = 4)
                     },
                     shape = RoundedCornerShape(50), // Capsule shape
                     colors = ButtonDefaults.buttonColors(Color(0xFF4CAF50)), // Green color
@@ -189,7 +188,8 @@ fun DoctorAppPreview() {
 //        BottomNavBar()
         TourPlanner(
             navController = rememberNavController(),
-            viewModel = TourPlannerViewModel()
+            viewModel = TourPlannerViewModel(),
+            empId = 0
             )
     }
 

@@ -84,7 +84,7 @@ const EmployeeForm = () => {
     return (
         <div className="form-container">
             <form className="employee-form" onSubmit={handleSubmit}>
-                <h2>Employee Form</h2>
+                {/* <h2>Employee Form</h2> */}
 
                 <div className="form-group">
                     <label>Name</label>
