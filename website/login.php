@@ -23,7 +23,7 @@ $userId = $_POST['userId'];
 $userPassword = $_POST['password'];
 
 // Prepare the SQL query
-$sql = "SELECT name, area, photo FROM employee WHERE username = ? AND password = ?";
+$sql = "SELECT id, name, area, photo FROM employee WHERE username = ? AND password = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ss", $userId, $userPassword);
 $stmt->execute();
@@ -33,6 +33,7 @@ if ($result->num_rows > 0) {
     $employee = $result->fetch_assoc(); 
     echo json_encode(array(
         "status" => "success",
+        "id" => $employee['id'],
         "name" => $employee['name'],
         "area" => $employee['area'],
         "photo" => $employee['photo']
