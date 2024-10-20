@@ -32,13 +32,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.medimetrics.Employee
 import com.example.medimetrics.R
+import com.example.medimetrics.data.model.Employee
 import com.example.medimetrics.ui.theme.MediMetricsTheme
 
 @Composable
 fun HomeScreen(
-    employee: Employee,
+    employee: com.example.medimetrics.data.model.Employee,
     navController: NavController
 ) {
     Log.d("HomeScreen", "Homescreen")
@@ -73,7 +73,10 @@ fun HomeScreen(
             Spacer(modifier = Modifier.height(10.dp))
 
             // Dashboard Icons
-            DashboardIcons(navController = navController)
+            DashboardIcons(
+                navController = navController,
+                employee = employee
+                )
 
             Spacer(modifier = Modifier.height(10.dp))
 
@@ -117,7 +120,7 @@ fun AppHeader() {
 }
 
 @Composable
-fun ProfileSection(employee: com.example.medimetrics.Employee) {
+fun ProfileSection(employee: Employee) {
     Row(
         verticalAlignment = CenterVertically,
         modifier = Modifier.fillMaxWidth(),
@@ -131,7 +134,7 @@ fun ProfileSection(employee: com.example.medimetrics.Employee) {
 
         Spacer(modifier = Modifier.weight(1f))
 
-        // Profile Image
+//         //Profile Image
 //        Image(
 //            painter = rememberImagePainter(employee.photo), // Use Coil for loading images from URLs
 //            contentDescription = "Profile Image",
@@ -184,7 +187,10 @@ fun MonthlyCallsCard() {
 
 
 @Composable
-fun DashboardIcons(navController: NavController) {
+fun DashboardIcons(
+    navController: NavController,
+    employee: Employee
+) {
     Column(
         verticalArrangement = Arrangement.Center
     ) {
@@ -196,7 +202,9 @@ fun DashboardIcons(navController: NavController) {
                 iconRes = R.drawable.planner_icon,
                 label = "Tour Planner",
                 backgroundColor = Color(0xFFB3E5FC),
-                onClick = { navController.navigate("tourPlanner")  }
+                onClick = {
+                    println("Navigating to Tour Planner with employeeId: ${employee.id}")
+                    navController.navigate("tourPlanner/${employee.id}")  }
             )
             DashboardCardItem(
                 iconRes = R.drawable.selfie_icon,

@@ -1,6 +1,6 @@
 package com.example.test
 
-import androidx.compose.foundation.interaction.DragInteraction
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -22,6 +23,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -38,6 +40,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.medimetrics.components.TodayCallsCard
+import com.example.medimetrics.data.model.Doctor
 import com.example.medimetrics.ui.theme.MediMetricsTheme
 import com.example.medimetrics.viewmodel.TourPlannerViewModel
 import com.example.test.components.BottomNavBar
@@ -46,16 +49,17 @@ import com.example.test.components.BottomNavBar
 @Composable
 fun TourPlanner(
     navController: NavController,
-    viewModel: TourPlannerViewModel
+    viewModel: TourPlannerViewModel,
+    empId: Int
 ) {
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { navController.navigate("newItem") },
+                onClick = { navController.navigate("doctorList") },
                 containerColor = Color(0xFFF05454),
                 shape = RoundedCornerShape(26.dp),
                 modifier = Modifier
-                    .padding(16.dp)
+                    .padding(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 70.dp)
                     .size(75.dp)
             ) {
                 Icon(
@@ -100,7 +104,7 @@ fun TourPlanner(
                 // Capsule Submit Button
                 Button(
                     onClick = {
-                        // Handle submit action
+                        viewModel.submitTourPlan(employeeId = 4)
                     },
                     shape = RoundedCornerShape(50), // Capsule shape
                     colors = ButtonDefaults.buttonColors(Color(0xFF4CAF50)), // Green color
@@ -119,26 +123,55 @@ fun TourPlanner(
             Spacer(modifier = Modifier.height(16.dp))
 
             // LazyColumn to display list of items
-            val items by viewModel.items.collectAsState()
+            val selectedDoctors by viewModel.selectedDoctors.collectAsState()
 
-            LazyColumn(
-                modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
             ) {
-                items(items) { item ->
-                    Card(
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = CardDefaults.cardColors(Color(0xFFB2DFDB)),
-                        shape = RoundedCornerShape(8.dp)
-                    ) {
-                        Text(
-                            text = item,
-                            modifier = Modifier.padding(16.dp),
-                            fontSize = 18.sp
-                        )
+                LazyColumn(
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    items(selectedDoctors) { doctor ->
+                        DoctorCard(doctor = doctor) {
+                            viewModel.removeDoctorFromTour(doctor = doctor)
+                        }
                     }
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun DoctorCard(doctor: Doctor, onRemoveClick: () -> Unit) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp),
+        elevation = CardDefaults.cardElevation(8.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Column {
+                Text(text = doctor.dr_name, style = MaterialTheme.typography.titleLarge)
+                Text(text = "Specialty: ${doctor.dr_specialization}")
+                Text(text = "Area: ${doctor.dr_area}")
+            }
+
+            Icon(
+                imageVector = Icons.Default.Delete,
+                contentDescription = "Remove Doctor",
+                tint = Color.Red,
+                modifier = Modifier
+                    .size(24.dp)
+                    .clickable { onRemoveClick() } // Trigger removal on click
+            )
         }
     }
 }
@@ -155,7 +188,8 @@ fun DoctorAppPreview() {
 //        BottomNavBar()
         TourPlanner(
             navController = rememberNavController(),
-            viewModel = TourPlannerViewModel()
+            viewModel = TourPlannerViewModel(),
+            empId = 0
             )
     }
 

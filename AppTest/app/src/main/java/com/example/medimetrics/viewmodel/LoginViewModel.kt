@@ -28,7 +28,7 @@ class LoginViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     response.body()?.let {
                         if (it.status == "success") {
-                            employeeData.value = Employee(it.name!!, it.area!!, it.photo!!)
+                            employeeData.value = Employee(it.id!! ,it.name!!, it.area!!, it.photo!!)
                             loginStatus.value = "success"
                         } else {
                             loginStatus.value = "failure"

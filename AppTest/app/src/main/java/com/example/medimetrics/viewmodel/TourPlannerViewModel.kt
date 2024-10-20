@@ -1,28 +1,29 @@
 package com.example.medimetrics.viewmodel
 
+import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.medimetrics.data.model.Doctor
 import com.example.medimetrics.data.network.ApiClient
+import com.google.gson.Gson
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class TourPlannerViewModel: ViewModel() {
-    // State list to hold items added to the tour planner
-//    private val _items = mutableStateListOf<String>()
-//    val items: SnapshotStateList<String> get() = _items
+class TourPlannerViewModel : ViewModel() {
 
-    // Function to add a new item to the list
-//    fun addItem(item: String) {
-//        _items.add(item)
-//    }
-
+    // List of all doctors fetched from API
     private val _doctorList = MutableStateFlow<List<Doctor>>(emptyList())
-    val doctorList = _doctorList.asStateFlow()
+    val doctorList: StateFlow<List<Doctor>> = _doctorList
 
+    // List of selected doctors for the tour planner
+    private val _selectedDoctors = MutableStateFlow<List<Doctor>>(emptyList())
+    val selectedDoctors: StateFlow<List<Doctor>> = _selectedDoctors
+
+    // Fetch all doctors from the API
     fun fetchDoctors() {
         viewModelScope.launch {
             try {
@@ -36,10 +37,35 @@ class TourPlannerViewModel: ViewModel() {
         }
     }
 
-    private val _items = MutableStateFlow<List<String>>(emptyList())
-    val items = _items.asStateFlow()
+    // Add a doctor to the selected list for the tour planner
+    fun addDoctorToTour(doctor: Doctor) {
+        if (!_selectedDoctors.value.contains(doctor)) {
+            _selectedDoctors.value = _selectedDoctors.value + doctor
+        }
+    }
 
-    fun addItem(item: String) {
-        _items.value = _items.value + item
+    // Remove a doctor from the selected list (if needed)
+    fun removeDoctorFromTour(doctor: Doctor) {
+        _selectedDoctors.value = _selectedDoctors.value - doctor
+    }
+
+    fun submitTourPlan(employeeId: Int) {
+        val doctorListJson = Gson().toJson(_selectedDoctors.value)  // Convert to JSON
+        Log.d("TourPlannerViewModel", "Doctor List JSON: $doctorListJson")
+
+        viewModelScope.launch {
+            try {
+                val response = ApiClient.apiService.uploadTourPlan(employeeId, doctorListJson)
+                if (response.isSuccessful && response.body()?.success == true) {
+                    // Handle success, e.g., show success message or navigate back
+                    println("Tour plan submitted successfully!")
+                } else {
+                    // Handle failure
+                    println("Failed to submit tour plan: ${response.body()?.message}")
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 }

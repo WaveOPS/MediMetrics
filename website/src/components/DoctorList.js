@@ -46,7 +46,7 @@ const DoctorList = () => {
     };
 
     const filteredDoctors = doctors.filter((doctor) =>
-        doctor.name.toLowerCase().includes(searchTerm)
+        doctor.dr_name && doctor.dr_name.toLowerCase().includes(searchTerm) // Ensure the property exists
     );
 
     return (
@@ -84,23 +84,24 @@ const DoctorList = () => {
                 <tbody>
                     {filteredDoctors.length > 0 ? (
                         filteredDoctors.map((doctor) => (
-                            <tr key={doctor.id}>
+                            <tr key={doctor.dr_id}> {/* Use dr_id for the key */}
                                 <td>
                                     <div className="doctor-info">
                                         <img
-                                            src={`http://localhost/MediMetrics/website/${doctor.photo}`}
+                                            src={`http://localhost/MediMetrics/website/${doctor.dr_photo}`} // Use dr_photo
+                                            alt={doctor.dr_name} // Alt text for accessibility
                                             className="doctor-photo"
                                         />
                                         <div>
-                                            <span className="doctor-name">{doctor.name}</span>
+                                            <span className="doctor-name">{doctor.dr_name}</span> {/* Use dr_name */}
                                             <br />
-                                            <span className="doctor-area">{doctor.area}</span>
+                                            <span className="doctor-area">{doctor.dr_area}</span> {/* Use dr_area */}
                                         </div>
                                     </div>
                                 </td>
-                                <td>{doctor.area}</td>
-                                <td>{doctor.specialization}</td>
-                                <td>{doctor.id}</td>
+                                <td>{doctor.dr_area}</td> {/* Use dr_area */}
+                                <td>{doctor.dr_specialization}</td> {/* Use dr_specialization */}
+                                <td>{doctor.dr_id}</td> {/* Use dr_id */}
                                 <td>
                                     <button
                                         className="action-btn"
@@ -111,13 +112,13 @@ const DoctorList = () => {
                                                     headers: {
                                                         'Content-Type': 'application/x-www-form-urlencoded'
                                                     },
-                                                    body: `id=${doctor.id}`
+                                                    body: `id=${doctor.dr_id}` // Use dr_id here
                                                 })
                                                 .then(response => response.json())
                                                 .then(data => {
                                                     if (data.status === 'success') {
                                                         console.log(data.message);
-                                                        setDoctors(doctors.filter(doc => doc.id !== doctor.id));
+                                                        setDoctors(doctors.filter(doc => doc.dr_id !== doctor.dr_id)); // Use dr_id here
                                                     } else {
                                                         console.error('Error deleting doctor:', data.message);
                                                     }

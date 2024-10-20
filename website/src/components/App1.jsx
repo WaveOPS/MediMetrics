@@ -35,8 +35,8 @@ const App1 = () => {
                         <Route path="/" element={<Dashboard />} />
                         <Route path="/employees" element={<EmployeeList />} />
                         <Route path="/employeeform" element={<EmployeeForm />} />
-                        <Route path="/doctors" element={<DoctorList />} />  
-                        <Route path="/doctorform" element={<DoctorForm />} /> 
+                        <Route path="/doctors" element={<DoctorList />} />  {/* Doctor List route */}
+                        <Route path="/doctorform" element={<DoctorForm />} /> {/* Doctor Form route */}
                     </Routes>
                 </div>
             </div>
