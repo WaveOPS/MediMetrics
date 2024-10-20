@@ -27,9 +27,11 @@ Sidebar.css
     margin-top: 20px;
 }
 .main-content {
-    margin-left: 110px; 
+    margin-left: 100px; 
     padding: 20px;
     width: calc(100% - 250px);
     height: 100vh;
     overflow-y: auto; /* Scroll the main content */
 }
+
+

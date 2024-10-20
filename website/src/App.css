@@ -1,6 +1,12 @@
 /* App.css */
 .App {
   display: flex;
+  background-color: #fefefe;
+  background-image: url(./components/img/bg2_app.png);
+  background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  width:auto;
 }
 
 .sidebar {
@@ -18,3 +24,7 @@
 }
 
 /* Additional styles for other elements can be added here */
+body, html, .login-container {
+  height: 100%;
+  margin: 0;
+}

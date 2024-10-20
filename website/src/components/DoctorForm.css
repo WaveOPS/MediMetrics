@@ -10,7 +10,8 @@
 }
 
 .doctor-form .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 18px;
+  
 }
 
 .doctor-form label {
@@ -100,6 +101,7 @@
   background-color: white;
   padding: 20px;
   border-radius: 8px;
+  height: 480px;
   width: 450px;  /* Adjust width of the form container inside the overlay */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slight shadow for the form container */
   position: relative;  /* For close button positioning */
@@ -118,7 +120,7 @@
 }
 
 .close-btn:hover {
-  color: #ff0000;  /* Optional: Make the close button red on hover */
+  color: #de7d7d;  /* Optional: Make the close button red on hover */
 }
 
 /* Add Doctor button styling */

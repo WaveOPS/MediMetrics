@@ -1,50 +1,75 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom'; // Using NavLink to apply active class to the current route
+import { NavLink, useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 import './Sidebar.css'; // Sidebar-specific styles
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUpWideShort, faChartLine, faDashboard, faDatabase, faEarListen, faEyeDropper, faEyeSlash, faGamepad, faGaugeHigh, faGhost, faGrinHearts, faHistory, faLifeRing, faList, faList12, faListAlt, faListCheck, faListDots, faListOl, faListSquares, faLocation, faLocust, faLowVision, faMugHot, faSackDollar, faSackXmark, faSadTear, faSailboat, faSatellite, faSatelliteDish, faSignOut, faTableList,  faUser, faUserDoctor } from '@fortawesome/free-solid-svg-icons';
+import { 
+    faChartLine, faHistory, faSignOut, faTableList, faUser, faUserDoctor 
+} from '@fortawesome/free-solid-svg-icons';
 
-const Sidebar = () => {
+const Sidebar = ({ setIsAuthenticated }) => {
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        setIsAuthenticated(false); // Set authentication to false
+        navigate('/'); // Redirect to login page
+    };
+
     return (
         <div className="sidebar">
             <div className="logo">MEDIMETRICS</div>
             <ul>
                 {/* Using NavLink for active styling */}
                 <li>
-                <FontAwesomeIcon icon={faTableList} />
-                    <NavLink exact to="/" activeClassName="active" >
+                    <FontAwesomeIcon icon={faTableList} />
+                    <NavLink 
+                        exact 
+                        to="/dashboard" 
+                        className={({ isActive }) => (isActive ? "active" : "")}
+                    >
                         <i className="fas fa-home"></i> Dashboard
                     </NavLink>
                 </li>
                 <li>
                     <FontAwesomeIcon icon={faUser} />
-                    <NavLink to="/employees" activeClassName="active">
-                        <i className="fas fa-user" ></i>Employees
+                    <NavLink 
+                        to="/employees" 
+                        className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                        <i className="fas fa-user"></i> Employees
                     </NavLink>
                 </li>
                 <li>
-                <FontAwesomeIcon icon={faUserDoctor} />
-                    <NavLink to="/doctors" activeClassName="active">
+                    <FontAwesomeIcon icon={faUserDoctor} />
+                    <NavLink 
+                        to="/doctors" 
+                        className={({ isActive }) => (isActive ? "active" : "")}
+                    >
                         <i className="fas fa-user-md"></i> Doctors
                     </NavLink>
                 </li>
                 <li>
-                <FontAwesomeIcon icon={faChartLine} />
-                    <NavLink to="/daily-reports" activeClassName="active">
+                    <FontAwesomeIcon icon={faChartLine} />
+                    <NavLink 
+                        to="/daily-reports" 
+                        className={({ isActive }) => (isActive ? "active" : "")}
+                    >
                         <i className="fas fa-clipboard"></i> Daily Reports
                     </NavLink>
                 </li>
                 <li>
-                <FontAwesomeIcon icon={faHistory} />
-                    <NavLink to="/previous-records" activeClassName="active">
+                    <FontAwesomeIcon icon={faHistory} />
+                    <NavLink 
+                        to="/previous-records" 
+                        className={({ isActive }) => (isActive ? "active" : "")}
+                    >
                         <i className="fas fa-history"></i> Previous Records
                     </NavLink>
                 </li>
                 <li>
-                <FontAwesomeIcon icon={faSignOut} />
-                    <NavLink to="/logout" activeClassName="active">
+                    <FontAwesomeIcon icon={faSignOut} />
+                    <button onClick={handleLogout} className="logout-button">
                         <i className="fas fa-sign-out-alt"></i> Log Out
-                    </NavLink>
+                    </button>
                 </li>
             </ul>
         </div>

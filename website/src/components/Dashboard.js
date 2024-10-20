@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+//import { Link } from 'react-router-dom'; 
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Dashboard.css';
 import './Sidebar.css';
 import './img/bg2_app.png'
 
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+//import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 const Dashboard = () => {
     const [employeeCount, setEmployeeCount] = useState(0);
