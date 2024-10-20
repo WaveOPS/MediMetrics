@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.medimetrics.data.model.Doctor
 import com.example.medimetrics.data.network.ApiClient
+import com.google.gson.Gson
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -45,5 +46,24 @@ class TourPlannerViewModel : ViewModel() {
     // Remove a doctor from the selected list (if needed)
     fun removeDoctorFromTour(doctor: Doctor) {
         _selectedDoctors.value = _selectedDoctors.value - doctor
+    }
+
+    fun submitTourPlan(employeeId: Int) {
+        val doctorListJson = Gson().toJson(_selectedDoctors.value)  // Convert to JSON
+
+        viewModelScope.launch {
+            try {
+                val response = ApiClient.apiService.uploadTourPlan(employeeId, doctorListJson)
+                if (response.isSuccessful && response.body()?.success == true) {
+                    // Handle success, e.g., show success message or navigate back
+                    println("Tour plan submitted successfully!")
+                } else {
+                    // Handle failure
+                    println("Failed to submit tour plan: ${response.body()?.message}")
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 }

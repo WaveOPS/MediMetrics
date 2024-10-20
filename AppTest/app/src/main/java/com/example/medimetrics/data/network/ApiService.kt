@@ -16,13 +16,25 @@ interface ApiService {
         @Field("password") password: String
     ): Call<EmployeeResponse>
 
-    @GET("get_doctors.php")  // Replace with your PHP endpoint
+    @GET("get-doctors.php")  // Replace with your PHP endpoint
     suspend fun getDoctors(): Response<List<Doctor>>
+
+    @POST("upload_tour_plan.php")
+    suspend fun uploadTourPlan(
+        @Field("employee_id") employeeId: Int,
+        @Field("doctor_list") doctorList: String
+    ): Response<TourPlan>
 }
 
 data class EmployeeResponse(
     val status: String,
+    val id: Int?,
     val name: String?,
     val area: String?,
     val photo: String?
+)
+
+data class TourPlan(
+    val success: Boolean,
+    val message: String
 )
