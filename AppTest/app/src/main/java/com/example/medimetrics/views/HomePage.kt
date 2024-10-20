@@ -196,7 +196,7 @@ fun DashboardIcons(navController: NavController) {
                 iconRes = R.drawable.planner_icon,
                 label = "Tour Planner",
                 backgroundColor = Color(0xFFB3E5FC),
-                onClick = { navController.navigate("tourPlanner/{employee.id}")  }
+                onClick = { navController.navigate("tourPlanner/{employeeId}")  }
             )
             DashboardCardItem(
                 iconRes = R.drawable.selfie_icon,

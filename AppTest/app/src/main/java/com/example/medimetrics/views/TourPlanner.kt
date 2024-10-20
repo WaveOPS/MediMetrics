@@ -1,7 +1,6 @@
 package com.example.test
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.DragInteraction
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,13 +27,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.PointerId
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -44,8 +41,6 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.medimetrics.components.TodayCallsCard
 import com.example.medimetrics.data.model.Doctor
-import com.example.medimetrics.data.model.Employee
-import com.example.medimetrics.data.network.EmployeeResponse
 import com.example.medimetrics.ui.theme.MediMetricsTheme
 import com.example.medimetrics.viewmodel.TourPlannerViewModel
 import com.example.test.components.BottomNavBar
@@ -55,7 +50,7 @@ import com.example.test.components.BottomNavBar
 fun TourPlanner(
     navController: NavController,
     viewModel: TourPlannerViewModel,
-    employeeId: Int
+    empId: Int
 ) {
     Scaffold(
         floatingActionButton = {
@@ -109,7 +104,7 @@ fun TourPlanner(
                 // Capsule Submit Button
                 Button(
                     onClick = {
-                        viewModel.submitTourPlan(employeeId = employeeId)
+                        viewModel.submitTourPlan(employeeId = 4)
                     },
                     shape = RoundedCornerShape(50), // Capsule shape
                     colors = ButtonDefaults.buttonColors(Color(0xFF4CAF50)), // Green color
@@ -194,7 +189,7 @@ fun DoctorAppPreview() {
         TourPlanner(
             navController = rememberNavController(),
             viewModel = TourPlannerViewModel(),
-            employeeId = 0
+            empId = 0
             )
     }
 

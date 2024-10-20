@@ -45,7 +45,6 @@ fun MyApp() {
 
     val tourPlannerViewModel = remember { TourPlannerViewModel() }
 
-
     NavHost(navController, startDestination = "login") {
         // Login screen composable
         composable("login") {
@@ -65,7 +64,7 @@ fun MyApp() {
         composable(
             "home/{employeeId}/{name}/{area}/{photo}",
             arguments = listOf(
-                navArgument("employeeId") { type = NavType.IntType },
+                navArgument("employeeId") { type = NavType.StringType },  // Change to StringType
                 navArgument("name") { type = NavType.StringType },
                 navArgument("area") { type = NavType.StringType },
                 navArgument("photo") { type = NavType.StringType }
@@ -73,7 +72,7 @@ fun MyApp() {
         ) { backStackEntry ->
             // Extracting the passed arguments to display on the HomeScreen
             val employee = Employee(
-                id = backStackEntry.arguments?.getInt("employeeId")?: 0,
+                id = backStackEntry.arguments?.getString("employeeId")?.toInt() ?: 0,  // Convert to Int here
                 name = backStackEntry.arguments?.getString("name") ?: "",
                 area = backStackEntry.arguments?.getString("area") ?: "",
                 photo = backStackEntry.arguments?.getString("photo") ?: ""
@@ -83,15 +82,13 @@ fun MyApp() {
             HomeScreen(employee = employee, navController)
         }
 
-//        composable("tourPlanner") {
-//            TourPlanner(navController = navController, viewModel = tourPlannerViewModel)
-//        }
-
         composable("tourPlanner/{employeeId}") { backStackEntry ->
-            val employeeId = backStackEntry.arguments?.getInt("employeeId")?: 0
+            val employeeIdString = backStackEntry.arguments?.getString("employeeId")
+                ?: "0"  // Get the employeeId as String
+            val employeeId = employeeIdString.toIntOrNull() ?: 0  // Safely convert to Int
             TourPlanner(
                 navController = navController,
-                employeeId = employeeId,
+                empId = employeeId,
                 viewModel = tourPlannerViewModel
             )
         }
@@ -101,6 +98,7 @@ fun MyApp() {
         }
     }
 }
+
 
 
 //@Composable
@@ -113,6 +111,10 @@ fun MyApp() {
 //            TourPlanner(viewModel = TourPlannerViewModel, employeeId = employeeId)
 //        }
 //        composable("newItem") {
+//            DoctorList(navController = navController, viewModel = viewModel)
+//        }
+//
+//        composable("doctorList") {
 //            DoctorList(navController = navController, viewModel = viewModel)
 //        }
 //    }

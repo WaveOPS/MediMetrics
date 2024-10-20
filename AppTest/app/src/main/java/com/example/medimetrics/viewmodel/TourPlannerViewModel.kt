@@ -1,5 +1,6 @@
 package com.example.medimetrics.viewmodel
 
+import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
@@ -50,6 +51,7 @@ class TourPlannerViewModel : ViewModel() {
 
     fun submitTourPlan(employeeId: Int) {
         val doctorListJson = Gson().toJson(_selectedDoctors.value)  // Convert to JSON
+        Log.d("TourPlannerViewModel", "Doctor List JSON: $doctorListJson")
 
         viewModelScope.launch {
             try {

@@ -19,6 +19,7 @@ interface ApiService {
     @GET("get-doctors.php")  // Replace with your PHP endpoint
     suspend fun getDoctors(): Response<List<Doctor>>
 
+    @FormUrlEncoded
     @POST("upload_tour_plan.php")
     suspend fun uploadTourPlan(
         @Field("employee_id") employeeId: Int,
