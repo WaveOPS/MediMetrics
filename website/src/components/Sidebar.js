@@ -70,6 +70,7 @@ const Sidebar = ({ setIsAuthenticated }) => {
                     <button onClick={handleLogout} className="logout-button">
                         <i className="fas fa-sign-out-alt"></i> Log Out
                     </button>
+                    
                 </li>
             </ul>
         </div>
