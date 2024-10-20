@@ -20,7 +20,7 @@ import com.example.medimetrics.ui.theme.MediMetricsTheme
 import com.example.medimetrics.viewmodel.TourPlannerViewModel
 import com.example.medimetrics.views.HomeScreen
 import com.example.medimetrics.views.LoginScreen
-import com.example.medimetrics.views.NewItemScreen
+import com.example.medimetrics.views.DoctorList
 import com.example.test.TourPlanner
 
 class MainActivity : ComponentActivity() {
@@ -83,7 +83,7 @@ fun MyApp() {
             TourPlanner(navController = navController, viewModel = tourPlannerViewModel)
         }
         composable("newItem") {
-            NewItemScreen(navController = navController, viewModel = tourPlannerViewModel)
+            DoctorList(navController = navController, viewModel = tourPlannerViewModel)
         }
     }
 }
@@ -98,7 +98,7 @@ fun AppNavigation(viewModel: TourPlannerViewModel = TourPlannerViewModel()) {
             TourPlanner(navController = navController, viewModel = viewModel)
         }
         composable("newItem") {
-            NewItemScreen(navController = navController, viewModel = viewModel)
+            DoctorList(navController = navController, viewModel = viewModel)
         }
     }
 }

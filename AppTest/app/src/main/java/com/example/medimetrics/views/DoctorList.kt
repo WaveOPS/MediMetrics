@@ -28,7 +28,7 @@ import com.example.medimetrics.data.model.Doctor
 import com.example.medimetrics.viewmodel.TourPlannerViewModel
 
 @Composable
-fun NewItemScreen(
+fun DoctorList(
     navController: NavController,
     viewModel: TourPlannerViewModel
 ) {
@@ -51,7 +51,7 @@ fun NewItemScreen(
         ) {
             items(doctorList) { doctor ->
                 DoctorItem(doctor) {
-                    viewModel.addItem("${doctor.dr_name} - ${doctor.dr_area}")
+                    viewModel.addDoctorToTour(doctor)
                     navController.popBackStack()
                 }
             }
@@ -82,7 +82,7 @@ fun DoctorItem(doctor: Doctor, onClick: () -> Unit) {
 @Preview
 @Composable
 fun NewItemScreenPreview() {
-    NewItemScreen(navController = rememberNavController(),
+    DoctorList(navController = rememberNavController(),
         viewModel = TourPlannerViewModel())
 
 }

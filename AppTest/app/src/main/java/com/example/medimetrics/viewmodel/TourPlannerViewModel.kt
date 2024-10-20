@@ -7,22 +7,21 @@ import androidx.lifecycle.viewModelScope
 import com.example.medimetrics.data.model.Doctor
 import com.example.medimetrics.data.network.ApiClient
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class TourPlannerViewModel: ViewModel() {
-    // State list to hold items added to the tour planner
-//    private val _items = mutableStateListOf<String>()
-//    val items: SnapshotStateList<String> get() = _items
+class TourPlannerViewModel : ViewModel() {
 
-    // Function to add a new item to the list
-//    fun addItem(item: String) {
-//        _items.add(item)
-//    }
-
+    // List of all doctors fetched from API
     private val _doctorList = MutableStateFlow<List<Doctor>>(emptyList())
-    val doctorList = _doctorList.asStateFlow()
+    val doctorList: StateFlow<List<Doctor>> = _doctorList
 
+    // List of selected doctors for the tour planner
+    private val _selectedDoctors = MutableStateFlow<List<Doctor>>(emptyList())
+    val selectedDoctors: StateFlow<List<Doctor>> = _selectedDoctors
+
+    // Fetch all doctors from the API
     fun fetchDoctors() {
         viewModelScope.launch {
             try {
@@ -36,10 +35,15 @@ class TourPlannerViewModel: ViewModel() {
         }
     }
 
-    private val _items = MutableStateFlow<List<String>>(emptyList())
-    val items = _items.asStateFlow()
+    // Add a doctor to the selected list for the tour planner
+    fun addDoctorToTour(doctor: Doctor) {
+        if (!_selectedDoctors.value.contains(doctor)) {
+            _selectedDoctors.value = _selectedDoctors.value + doctor
+        }
+    }
 
-    fun addItem(item: String) {
-        _items.value = _items.value + item
+    // Remove a doctor from the selected list (if needed)
+    fun removeDoctorFromTour(doctor: Doctor) {
+        _selectedDoctors.value = _selectedDoctors.value - doctor
     }
 }

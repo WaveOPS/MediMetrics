@@ -1,5 +1,6 @@
 package com.example.test
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.DragInteraction
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,9 +23,11 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -38,6 +41,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.medimetrics.components.TodayCallsCard
+import com.example.medimetrics.data.model.Doctor
 import com.example.medimetrics.ui.theme.MediMetricsTheme
 import com.example.medimetrics.viewmodel.TourPlannerViewModel
 import com.example.test.components.BottomNavBar
@@ -119,26 +123,41 @@ fun TourPlanner(
             Spacer(modifier = Modifier.height(16.dp))
 
             // LazyColumn to display list of items
-            val items by viewModel.items.collectAsState()
+            val selectedDoctors by viewModel.selectedDoctors.collectAsState()
 
-            LazyColumn(
-                modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp)
             ) {
-                items(items) { item ->
-                    Card(
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = CardDefaults.cardColors(Color(0xFFB2DFDB)),
-                        shape = RoundedCornerShape(8.dp)
-                    ) {
-                        Text(
-                            text = item,
-                            modifier = Modifier.padding(16.dp),
-                            fontSize = 18.sp
-                        )
+                LazyColumn(
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    items(selectedDoctors) { doctor ->
+                        DoctorCard(doctor = doctor) {
+                            // You can add logic to remove a doctor if needed
+                        }
                     }
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun DoctorCard(doctor: Doctor, onClick: () -> Unit) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp)
+            .clickable { onClick() },
+        elevation = CardDefaults.cardElevation(8.dp)
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text(text = doctor.dr_name, style = MaterialTheme.typography.titleLarge)
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(text = "Specialty: ${doctor.dr_specialization}")
+            Text(text = "Area: ${doctor.dr_area}")
         }
     }
 }
