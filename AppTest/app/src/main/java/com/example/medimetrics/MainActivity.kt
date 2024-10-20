@@ -54,6 +54,7 @@ fun MyApp() {
                 val encodedName = Uri.encode(employee.name)
                 val encodedArea = Uri.encode(employee.area)
                 val encodedPhoto = Uri.encode(employee.photo)
+                println(encodedId)
 
                 // Navigating to the HomeScreen, passing encoded employee details
                 navController.navigate("home/$encodedId/$encodedName/$encodedArea/$encodedPhoto")
@@ -78,14 +79,23 @@ fun MyApp() {
                 photo = backStackEntry.arguments?.getString("photo") ?: ""
             )
 
+            println("employee Id: ${employee.id}")
+
+
             // Pass employee object to HomeScreen
             HomeScreen(employee = employee, navController)
         }
 
-        composable("tourPlanner/{employeeId}") { backStackEntry ->
-            val employeeIdString = backStackEntry.arguments?.getString("employeeId")
-                ?: "0"  // Get the employeeId as String
-            val employeeId = employeeIdString.toIntOrNull() ?: 0  // Safely convert to Int
+        composable(
+            "tourPlanner/{employeeId}",
+            arguments = listOf(
+                navArgument("employeeId") { type = NavType.StringType }  // Ensure it's StringType
+            )
+        ) { backStackEntry ->
+            // Safely retrieving the employeeId from arguments
+            val employeeIdString = backStackEntry.arguments?.getString("employeeId") ?: "0"
+            val employeeId = employeeIdString.toIntOrNull() ?: 0
+
             TourPlanner(
                 navController = navController,
                 empId = employeeId,

@@ -73,7 +73,10 @@ fun HomeScreen(
             Spacer(modifier = Modifier.height(10.dp))
 
             // Dashboard Icons
-            DashboardIcons(navController = navController)
+            DashboardIcons(
+                navController = navController,
+                employee = employee
+                )
 
             Spacer(modifier = Modifier.height(10.dp))
 
@@ -184,7 +187,10 @@ fun MonthlyCallsCard() {
 
 
 @Composable
-fun DashboardIcons(navController: NavController) {
+fun DashboardIcons(
+    navController: NavController,
+    employee: Employee
+) {
     Column(
         verticalArrangement = Arrangement.Center
     ) {
@@ -196,7 +202,9 @@ fun DashboardIcons(navController: NavController) {
                 iconRes = R.drawable.planner_icon,
                 label = "Tour Planner",
                 backgroundColor = Color(0xFFB3E5FC),
-                onClick = { navController.navigate("tourPlanner/{employeeId}")  }
+                onClick = {
+                    println("Navigating to Tour Planner with employeeId: ${employee.id}")
+                    navController.navigate("tourPlanner/${employee.id}")  }
             )
             DashboardCardItem(
                 iconRes = R.drawable.selfie_icon,
