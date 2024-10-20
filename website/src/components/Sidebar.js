@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom'; // Using NavLink to apply active class to the current route
 import './Sidebar.css'; // Sidebar-specific styles
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChartLine, faDashboard, faHistory, faSignOut, faUser, faUserDoctor } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUpWideShort, faChartLine, faDashboard, faDatabase, faEarListen, faEyeDropper, faEyeSlash, faGamepad, faGaugeHigh, faGhost, faGrinHearts, faHistory, faLifeRing, faList, faList12, faListAlt, faListCheck, faListDots, faListOl, faListSquares, faLocation, faLocust, faLowVision, faMugHot, faSackDollar, faSackXmark, faSadTear, faSailboat, faSatellite, faSatelliteDish, faSignOut, faTableList,  faUser, faUserDoctor } from '@fortawesome/free-solid-svg-icons';
 
 const Sidebar = () => {
     return (
@@ -11,7 +11,7 @@ const Sidebar = () => {
             <ul>
                 {/* Using NavLink for active styling */}
                 <li>
-                <FontAwesomeIcon icon={faDashboard} />
+                <FontAwesomeIcon icon={faTableList} />
                     <NavLink exact to="/" activeClassName="active" >
                         <i className="fas fa-home"></i> Dashboard
                     </NavLink>

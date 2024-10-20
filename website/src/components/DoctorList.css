@@ -1,7 +1,7 @@
 /* General page layout */
-.employee-list-page {
+.doctor-list-page {
     padding: 20px;
-    background-color: #ffffff;
+    background-color: #f7f8fa;
     margin-left: 160px;
 }
 
@@ -17,10 +17,10 @@
     margin-left: -10px;
 }
 
-/* New container for search bar and Add button */
+/* Container for search bar and Add button */
 .search-add-container {
     display: flex;
-    justify-content: space-between;  /* Align search bar and button side by side */
+    justify-content: space-between;
     align-items: center;
     margin-top: 20px;
     margin-left: 4px;
@@ -48,8 +48,8 @@
     color: #aaa;
 }
 
-/* Add Employee Button */
-.add-employee-btn {
+/* Add Doctor Button */
+.add-doctor-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -59,18 +59,18 @@
     border: none;
     cursor: pointer;
     font-size: 16px;
-    height: 45px;  /* Adjusted height for better alignment */
-    width: 90px;   /* Adjusted width */
-    margin-left: 20px;  /* Space between search bar and button */
+    height: 45px;
+    width: 90px;
+    margin-left: 20px;
 }
 
-.add-employee-btn i {
+.add-doctor-btn i {
     font-size: 20px;
     margin-right: 5px;
 }
 
-/* Employee table */
-.employee-table {
+/* Doctor table */
+.doctor-table {
     width: 100%;
     border-collapse: collapse;
     background-color: white;
@@ -80,46 +80,46 @@
     margin-top: 20px;
 }
 
-.employee-table th, .employee-table td {
+.doctor-table th, .doctor-table td {
     padding: 12px 15px;
     text-align: left;
 }
 
-.employee-table th {
+.doctor-table th {
     background-color: #3a7bd5;
     color: white;
     font-weight: bold;
 }
 
-.employee-table td {
+.doctor-table td {
     border-bottom: 1px solid #ddd;
 }
 
-.employee-table tbody tr:hover {
+.doctor-table tbody tr:hover {
     background-color: #f1f1f1;
 }
 
-/* Employee info container for photo and name in a single line */
-.employee-info {
-    display: flex;         /* Use flexbox to align photo and name in a single row */
-    align-items: center;   /* Vertically center align photo and name */
+/* Doctor info container for photo and name in a single line */
+.doctor-info {
+    display: flex;
+    align-items: center;
 }
 
-.employee-photo {
+.doctor-photo {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    margin-right: 10px;   /* Space between photo and name */
+    margin-right: 10px;
 }
 
-.employee-name {
+.doctor-name {
     color: #3498db;
     font-weight: bold;
     cursor: pointer;
-    white-space: nowrap;   /* Prevent name from wrapping to the next line */
+    white-space: nowrap;
 }
 
-.employee-username {
+.doctor-area {
     font-size: 12px;
     color: gray;
 }
@@ -155,23 +155,23 @@
         margin-bottom: 15px;
     }
 
-    .add-employee-btn {
+    .add-doctor-btn {
         margin-top: 10px;
     }
 }
 
-/* Form overlay for employee form */
+/* Form overlay for doctor form */
 .form-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* Ensure it appears above all other content */
+    z-index: 1000;
 }
 
 .overlay-content {

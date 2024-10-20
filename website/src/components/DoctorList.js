@@ -1,64 +1,58 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './EmployeeList.css';
-import EmployeeForm from './EmployeeForm';
+import './DoctorList.css';
+import DoctorForm from './DoctorForm'; // Import DoctorForm component
 
-const EmployeeList = () => {
-    const [employees, setEmployees] = useState([]);
-    const [searchTerm, setSearchTerm] = useState(''); // State for the search term
-    const [showForm, setShowForm] = useState(false); // State to toggle form visibility
-    const overlayRef = useRef(null); // Create a reference for the overlay
+const DoctorList = () => {
+    const [doctors, setDoctors] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [showForm, setShowForm] = useState(false);
+    const overlayRef = useRef(null);
 
-    // Fetch employees from the backend
+    // Fetch doctors from the backend
     useEffect(() => {
-        fetch('http://localhost/MediMetrics/website/get-employees.php')
+        fetch('http://localhost/MediMetrics/website/get-doctors.php')
             .then((response) => response.json())
             .then((data) => {
-                setEmployees(data);
+                setDoctors(data);
             })
             .catch((error) => {
-                console.error('Error fetching employee data:', error);
+                console.error('Error fetching doctor data:', error);
             });
     }, []);
 
-    // Function to toggle the form visibility
     const toggleForm = () => {
         setShowForm(!showForm);
     };
 
-    // Close form when clicking outside the form
     const handleClickOutside = (event) => {
         if (overlayRef.current && !overlayRef.current.contains(event.target)) {
             setShowForm(false);
         }
     };
 
-    // Add event listener for clicks when the form is open
     useEffect(() => {
         if (showForm) {
             document.addEventListener('mousedown', handleClickOutside);
         } else {
             document.removeEventListener('mousedown', handleClickOutside);
         }
-        // Cleanup event listener on component unmount or form close
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, [showForm]);
 
-    // Handle search input change
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value.toLowerCase());
     };
 
-    // Filter employees based on the search term
-    const filteredEmployees = employees.filter((employee) =>
-        employee.name.toLowerCase().includes(searchTerm) // Assuming the name field is used for search
+    const filteredDoctors = doctors.filter((doctor) =>
+        doctor.name.toLowerCase().includes(searchTerm)
     );
 
     return (
-        <div className="employee-list-page">
+        <div className="doctor-list-page">
             <div className="header">
-                <h1>EMPLOYEES</h1>
+                <h1>DOCTORS</h1>
             </div>
 
             <div className="search-add-container">
@@ -66,69 +60,70 @@ const EmployeeList = () => {
                     <i className="fas fa-search"></i>
                     <input
                         type="text"
-                        placeholder="Search employees..."
+                        placeholder="Search doctors..."
                         value={searchTerm}
                         onChange={handleSearchChange}
                     />
                 </div>
 
-                <button className="add-employee-btn" onClick={toggleForm}>
+                <button className="add-doctor-btn" onClick={toggleForm}>
                     <i className="fas fa-plus"></i> Add
                 </button>
             </div>
 
-            <table className="employee-table">
+            <table className="doctor-table">
                 <thead>
                     <tr>
-                        <th>Employee</th>
+                        <th>Doctor</th>
                         <th>Area</th>
-                        <th>Employee ID</th>
+                        <th>Specialization</th>
+                        <th>Doctor ID</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {filteredEmployees.length > 0 ? (
-                        filteredEmployees.map((employee) => (
-                            <tr key={employee.id}>
+                    {filteredDoctors.length > 0 ? (
+                        filteredDoctors.map((doctor) => (
+                            <tr key={doctor.id}>
                                 <td>
-                                    <div className="employee-info">
-                                        <img 
-                                            src={`http://localhost/MediMetrics/website/${employee.photo}`} 
-                                            className="employee-photo" 
+                                    <div className="doctor-info">
+                                        <img
+                                            src={`http://localhost/MediMetrics/website/${doctor.photo}`}
+                                            className="doctor-photo"
                                         />
                                         <div>
-                                            <span className="employee-name">{employee.name}</span>
+                                            <span className="doctor-name">{doctor.name}</span>
                                             <br />
-                                            <span className="employee-username">{employee.username}</span>
+                                            <span className="doctor-area">{doctor.area}</span>
                                         </div>
                                     </div>
                                 </td>
-                                <td>{employee.area}</td>
-                                <td>{employee.id}</td>
+                                <td>{doctor.area}</td>
+                                <td>{doctor.specialization}</td>
+                                <td>{doctor.id}</td>
                                 <td>
                                     <button
                                         className="action-btn"
                                         onClick={() => {
-                                            if (window.confirm("Are you sure you want to delete this employee?")) {
-                                                fetch(`http://localhost/MediMetrics/website/delete-employee.php`, {
+                                            if (window.confirm("Are you sure you want to delete this doctor?")) {
+                                                fetch(`http://localhost/MediMetrics/website/delete-doctor.php`, {
                                                     method: 'DELETE',
                                                     headers: {
                                                         'Content-Type': 'application/x-www-form-urlencoded'
                                                     },
-                                                    body: `id=${employee.id}`
+                                                    body: `id=${doctor.id}`
                                                 })
                                                 .then(response => response.json())
                                                 .then(data => {
                                                     if (data.status === 'success') {
-                                                        // Update the employee list or handle success
                                                         console.log(data.message);
-                                                        setEmployees(employees.filter(emp => emp.id !== employee.id));
+                                                        setDoctors(doctors.filter(doc => doc.id !== doctor.id));
                                                     } else {
-                                                        console.error('Error deleting employee:', data.message);
+                                                        console.error('Error deleting doctor:', data.message);
                                                     }
                                                 })
                                                 .catch(error => {
-                                                    console.error('Error deleting employee:', error);
+                                                    console.error('Error deleting doctor:', error);
                                                 });
                                             }
                                         }}
@@ -140,7 +135,7 @@ const EmployeeList = () => {
                         ))
                     ) : (
                         <tr>
-                            <td colSpan="4" style={{ textAlign: 'center' }}>No employees found</td>
+                            <td colSpan="5" style={{ textAlign: 'center' }}>No doctors found</td>
                         </tr>
                     )}
                 </tbody>
@@ -149,7 +144,7 @@ const EmployeeList = () => {
             {showForm && (
                 <div className="form-overlay">
                     <div className="overlay-content" ref={overlayRef}>
-                        <EmployeeForm />
+                        <DoctorForm />
                         <button className="close-btn" onClick={toggleForm}>Close</button>
                     </div>
                 </div>
@@ -158,4 +153,4 @@ const EmployeeList = () => {
     );
 };
 
-export default EmployeeList;
+export default DoctorList;
