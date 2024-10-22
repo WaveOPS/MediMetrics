@@ -33,5 +33,19 @@ Sidebar.css
     height: 100vh;
     overflow-y: auto; /* Scroll the main content */
 }
-
-
+.logout-button{
+    margin-left: 0px;
+    border: none;
+    background: none;
+    padding: 0;
+    text-align: center;
+    outline: none;
+    font-size: large;
+    font-weight: 600;
+   
+}
+.logout-button:hover {
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    color: #333;
+}

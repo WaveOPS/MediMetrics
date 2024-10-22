@@ -58,11 +58,11 @@ const Sidebar = ({ setIsAuthenticated }) => {
                 </li>
                 <li>
                     <FontAwesomeIcon icon={faHistory} />
-                    <NavLink 
+                    <NavLink
                         to="/previous-records" 
                         className={({ isActive }) => (isActive ? "active" : "")}
                     >
-                        <i className="fas fa-history"></i> Previous Records
+                        <i className=" fa-history"></i> Previous Records
                     </NavLink>
                 </li>
                 <li>
