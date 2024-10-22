@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 20, 2024 at 12:30 PM
+-- Generation Time: Oct 22, 2024 at 02:06 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -41,13 +41,16 @@ CREATE TABLE `doctor` (
 --
 
 INSERT INTO `doctor` (`dr_name`, `dr_age`, `dr_area`, `dr_specialization`, `dr_photo`, `dr_id`) VALUES
-('asdf', 21, 'kjhgf', '0', 'uploads/IMG20231015131306.jpg', 1),
 ('Pawan ', 32, 'Vashi', 'Orthopedic', 'uploads/Screenshot 2024-10-07 033159.png', 2),
 ('Shital Prajapati', 19, 'Kamothe', 'Gynac', 'uploads/Screenshot 2024-10-07 002851.png', 3),
 ('Lightning', 21, 'gfdsa', 'gfdswerf', 'uploads/Screenshot 2024-10-07 033159.png', 4),
 ('Dr. Manjusha Deshmukh', 69, 'Kharghar', 'BrainFucking', 'uploads/Screenshot 2024-10-04 034424.png', 5),
 ('Dr. Manjusha Deshmukh', 343, 'dagr', '54werfw', 'uploads/Screenshot 2024-10-07 033159.png', 6),
-('Dr. Om Moholkar', 20, 'helo', 'hello', 'uploads/Screenshot 2024-10-08 233527.png', 7);
+('Dr. Om Moholkar', 20, 'helo', 'hello', 'uploads/Screenshot 2024-10-08 233527.png', 7),
+('Dr. Hello', 23, 'ytrer', 'dum di dumm dumm', 'uploads/Screenshot 2024-10-08 233802.png', 8),
+('Dr. fwergr', 32, 'ergveg', 'Psyco', 'uploads/Screenshot 2024-10-07 033159.png', 9),
+('Dr. Hello', 23, 'grea', 'fqrg', 'uploads/Screenshot 2024-10-07 002851.png', 10),
+('Dr. Sujata Bhairnallykar', 99999, 'Thane Mental Hospital', 'Project Report', 'uploads/Screenshot 2024-10-07 002851.png', 11);
 
 -- --------------------------------------------------------
 
@@ -79,7 +82,9 @@ INSERT INTO `employee` (`id`, `name`, `age`, `area`, `username`, `password`, `ph
 (12, 'Om Moholkar', 43, 'hgf', 'dsa', 'fdsa', 'uploads/Screenshot 2024-10-08 233802.png'),
 (13, 'test2', 32, 'gfdsa', 'fdsa', 'fdsa', 'uploads/Screenshot 2024-10-07 033159.png'),
 (14, 'test 3', 23, 'fdsfd', 'fadfds', 'fadsfs', 'uploads/Screenshot 2024-10-07 033159.png'),
-(15, 'Raj', 23, 'acdfs', 'sdaf', 'asdf', 'uploads/Screenshot 2024-10-07 002851.png');
+(15, 'Raj', 23, 'acdfs', 'sdaf', 'asdf', 'uploads/Screenshot 2024-10-07 002851.png'),
+(17, 'Djajkdfreg', 32, 'fewgre', 'rweg', '432rewg', 'Screenshot 2024-10-07 002851.png'),
+(18, 'afgdag', 79, 'fghj', 'dfghn', '4567', 'Screenshot 2024-10-07 002851.png');
 
 -- --------------------------------------------------------
 
@@ -93,6 +98,15 @@ CREATE TABLE `tour_plans` (
   `doctor_list` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`doctor_list`)),
   `submitted_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tour_plans`
+--
+
+INSERT INTO `tour_plans` (`id`, `employee_id`, `doctor_list`, `submitted_at`) VALUES
+(1, 12, '[{\"dr_area\":\"Kharghar\",\"dr_name\":\"Dr. Manjusha Deshmukh\",\"dr_specialization\":\"BrainFucking\"},{\"dr_area\":\"ytrer\",\"dr_name\":\"Dr. Hello\",\"dr_specialization\":\"dum di dumm dumm\"}]', '2024-10-20 11:32:00'),
+(2, 4, '[{\"dr_area\":\"Kharghar\",\"dr_name\":\"Dr. Manjusha Deshmukh\",\"dr_specialization\":\"BrainFucking\"},{\"dr_area\":\"helo\",\"dr_name\":\"Dr. Om Moholkar\",\"dr_specialization\":\"hello\"},{\"dr_area\":\"Kamothe\",\"dr_name\":\"Shital Prajapati\",\"dr_specialization\":\"Gynac\"},{\"dr_area\":\"ytrer\",\"dr_name\":\"Dr. Hello\",\"dr_specialization\":\"dum di dumm dumm\"}]', '2024-10-20 12:00:56'),
+(3, 4, '[{\"dr_area\":\"Vashi\",\"dr_name\":\"Pawan \",\"dr_specialization\":\"Orthopedic\"},{\"dr_area\":\"Kamothe\",\"dr_name\":\"Shital Prajapati\",\"dr_specialization\":\"Gynac\"},{\"dr_area\":\"Kharghar\",\"dr_name\":\"Dr. Manjusha Deshmukh\",\"dr_specialization\":\"BrainFucking\"},{\"dr_area\":\"helo\",\"dr_name\":\"Dr. Om Moholkar\",\"dr_specialization\":\"hello\"},{\"dr_area\":\"ytrer\",\"dr_name\":\"Dr. Hello\",\"dr_specialization\":\"dum di dumm dumm\"}]', '2024-10-20 13:26:01');
 
 --
 -- Indexes for dumped tables
@@ -126,19 +140,19 @@ ALTER TABLE `tour_plans`
 -- AUTO_INCREMENT for table `doctor`
 --
 ALTER TABLE `doctor`
-  MODIFY `dr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `dr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tour_plans`
 --
 ALTER TABLE `tour_plans`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
