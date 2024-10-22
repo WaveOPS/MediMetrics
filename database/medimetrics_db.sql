@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 22, 2024 at 02:06 PM
+-- Generation Time: Oct 22, 2024 at 02:22 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -84,7 +84,8 @@ INSERT INTO `employee` (`id`, `name`, `age`, `area`, `username`, `password`, `ph
 (14, 'test 3', 23, 'fdsfd', 'fadfds', 'fadsfs', 'uploads/Screenshot 2024-10-07 033159.png'),
 (15, 'Raj', 23, 'acdfs', 'sdaf', 'asdf', 'uploads/Screenshot 2024-10-07 002851.png'),
 (17, 'Djajkdfreg', 32, 'fewgre', 'rweg', '432rewg', 'Screenshot 2024-10-07 002851.png'),
-(18, 'afgdag', 79, 'fghj', 'dfghn', '4567', 'Screenshot 2024-10-07 002851.png');
+(18, 'afgdag', 79, 'fghj', 'dfghn', '4567', 'Screenshot 2024-10-07 002851.png'),
+(19, 'test', 67, 'dfbnj', 'fyhjk', 'bhjok', 'bg2_app.png');
 
 -- --------------------------------------------------------
 
@@ -146,7 +147,7 @@ ALTER TABLE `doctor`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tour_plans`
