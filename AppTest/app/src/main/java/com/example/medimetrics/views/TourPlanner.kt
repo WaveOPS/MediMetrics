@@ -56,16 +56,16 @@ fun TourPlanner(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = { navController.navigate("doctorList") },
-                containerColor = Color(0xFFF05454),
+                containerColor = Color(0xFFE1EBFF),
                 shape = RoundedCornerShape(26.dp),
                 modifier = Modifier
-                    .padding(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 70.dp)
+                    .padding(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 35.dp)
                     .size(75.dp)
             ) {
                 Icon(
                     Icons.Default.Add,
                     contentDescription = "Add Item",
-                    tint = Color.White,
+                    tint = Color.Black,
                     modifier = Modifier.size(25.dp)
                 )
             }

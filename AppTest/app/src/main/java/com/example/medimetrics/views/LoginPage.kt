@@ -56,7 +56,7 @@ fun LoginScreen(
                     .padding(top = 304.dp)
                     .height(190.dp)
                     .align(Alignment.BottomCenter),
-                colorFilter = ColorFilter.tint(Color(0xFF253334))
+                colorFilter = ColorFilter.tint(Color(0xFF0D4D7A))
             )
             Image(painter = painterResource(id = R.drawable.leaves),
                 contentDescription = null,
@@ -65,7 +65,7 @@ fun LoginScreen(
                     .requiredSize(650.dp)
                     .padding(top = 374.dp)
                     .align(Alignment.TopCenter),
-                colorFilter = ColorFilter.tint(Color(0xFF253334))
+                colorFilter = ColorFilter.tint(Color(0xFF0D4D7A))
             )
             /// Content
             Column(
@@ -76,7 +76,7 @@ fun LoginScreen(
                     .padding(horizontal = 24.dp, vertical = 204.dp)
             ) {
                 Image(
-                    painter = painterResource(R.drawable.medimetrics_logo),
+                    painter = painterResource(R.drawable.medimetircs_final),
                     contentDescription = null,
                     modifier = Modifier.padding(bottom = 24.dp),
 //                    colorFilter = ColorFilter.tint(Color.Green)

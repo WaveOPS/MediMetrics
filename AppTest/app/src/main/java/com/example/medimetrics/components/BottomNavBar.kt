@@ -47,7 +47,7 @@ fun BottomNavBar() {
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = 16.dp, start = 16.dp, end = 16.dp),  // Increased padding for a larger container
-        colors = CardDefaults.cardColors(Color(0xFFFF5F5F)),
+        colors = CardDefaults.cardColors(Color(0xFF0D4D7A)),
         elevation = CardDefaults.cardElevation(10.dp),
         shape = RoundedCornerShape(20.dp)  // More rounded edges for aesthetics
     ) {
