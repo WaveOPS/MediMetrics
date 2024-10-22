@@ -3,7 +3,7 @@
 $host = "localhost";
 $user = "root";
 $password = "";
-$dbname = "your_database"; // Replace with your database name
+$dbname = "medimetrics_db"; // Replace with your database name
 
 $conn = new mysqli($host, $user, $password, $dbname);
 
