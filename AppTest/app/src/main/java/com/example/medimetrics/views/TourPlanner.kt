@@ -104,7 +104,7 @@ fun TourPlanner(
                 // Capsule Submit Button
                 Button(
                     onClick = {
-                        viewModel.submitTourPlan(employeeId = 4)
+                        viewModel.submitTourPlan(employeeId = empId)
                     },
                     shape = RoundedCornerShape(50), // Capsule shape
                     colors = ButtonDefaults.buttonColors(Color(0xFF4CAF50)), // Green color

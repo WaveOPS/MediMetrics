@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 22, 2024 at 02:22 PM
+-- Generation Time: Oct 22, 2024 at 10:01 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -31,26 +31,24 @@ CREATE TABLE `doctor` (
   `dr_name` varchar(50) NOT NULL,
   `dr_age` int(3) NOT NULL,
   `dr_area` varchar(50) NOT NULL,
-  `dr_specialization` varchar(255) NOT NULL,
+  `dr_specialization` varchar(20) NOT NULL,
   `dr_photo` varchar(255) NOT NULL,
-  `dr_id` int(11) NOT NULL
+  `dr_id` int(11) NOT NULL,
+  `latitude` decimal(10,8) DEFAULT NULL,
+  `longitude` decimal(11,8) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `doctor`
 --
 
-INSERT INTO `doctor` (`dr_name`, `dr_age`, `dr_area`, `dr_specialization`, `dr_photo`, `dr_id`) VALUES
-('Pawan ', 32, 'Vashi', 'Orthopedic', 'uploads/Screenshot 2024-10-07 033159.png', 2),
-('Shital Prajapati', 19, 'Kamothe', 'Gynac', 'uploads/Screenshot 2024-10-07 002851.png', 3),
-('Lightning', 21, 'gfdsa', 'gfdswerf', 'uploads/Screenshot 2024-10-07 033159.png', 4),
-('Dr. Manjusha Deshmukh', 69, 'Kharghar', 'BrainFucking', 'uploads/Screenshot 2024-10-04 034424.png', 5),
-('Dr. Manjusha Deshmukh', 343, 'dagr', '54werfw', 'uploads/Screenshot 2024-10-07 033159.png', 6),
-('Dr. Om Moholkar', 20, 'helo', 'hello', 'uploads/Screenshot 2024-10-08 233527.png', 7),
-('Dr. Hello', 23, 'ytrer', 'dum di dumm dumm', 'uploads/Screenshot 2024-10-08 233802.png', 8),
-('Dr. fwergr', 32, 'ergveg', 'Psyco', 'uploads/Screenshot 2024-10-07 033159.png', 9),
-('Dr. Hello', 23, 'grea', 'fqrg', 'uploads/Screenshot 2024-10-07 002851.png', 10),
-('Dr. Sujata Bhairnallykar', 99999, 'Thane Mental Hospital', 'Project Report', 'uploads/Screenshot 2024-10-07 002851.png', 11);
+INSERT INTO `doctor` (`dr_name`, `dr_age`, `dr_area`, `dr_specialization`, `dr_photo`, `dr_id`, `latitude`, `longitude`) VALUES
+('Dr. Om Moholkar', 40, 'Juinagar', 'Cardiologist ', 'uploads/employee1.jpeg', 2, NULL, NULL),
+('Dr. Pawan Jamkhande', 32, 'Vashi', 'Orthopedist', 'uploads/employee6.jpeg', 3, NULL, NULL),
+('Dr. Shital Prajapati', 32, 'Kamothe', 'Gynaecologist', 'uploads/employee5.jpeg', 6, 51.51624032, -0.10986328),
+('Dr. Avdhut Rokade', 32, 'Dombivili', 'Family Physician', 'uploads/employee3.jpeg', 7, 51.51624032, -0.10986328),
+('Dr. Shrihari Mane', 32, 'Sion', 'Dermatologist', 'uploads/employee5.jpeg', 8, 51.51624032, -0.10986328),
+('Dr. Sharmeen Khan', 32, 'Taloja', 'Child Speacialist ', 'uploads/employee5.jpeg', 9, 51.51624032, -0.10986328);
 
 -- --------------------------------------------------------
 
@@ -73,19 +71,13 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`id`, `name`, `age`, `area`, `username`, `password`, `photo`) VALUES
-(3, 'Om Moholkar', 20, 'Juinagar', 'omoholkar', '1234', 'uploads/Screenshot 2024-10-07 033159.png'),
-(4, 'Pawan Jamkhande', 20, 'Vashi', 'pawan', '1234', 'uploads/Screenshot 2024-10-07 002851.png'),
-(5, 'Shital Prajapati', 19, 'Kamothe', 'shital', '1234', 'uploads/Screenshot 2024-10-07 033159.png'),
-(8, 'Avdhut Rokde', 19, 'Dombivli ', 'avdhut', 'shitdhut', 'uploads/Screenshot 2024-10-09 022833.png'),
-(9, 'Om Moholkar', 32, 'gfd', 'gfd', 'gfd', 'uploads/Screenshot 2024-10-07 002851.png'),
-(11, 'help om now', 432, 'fds', 'fdsa', 'dsa', 'uploads/Screenshot 2024-10-07 002851.png'),
-(12, 'Om Moholkar', 43, 'hgf', 'dsa', 'fdsa', 'uploads/Screenshot 2024-10-08 233802.png'),
-(13, 'test2', 32, 'gfdsa', 'fdsa', 'fdsa', 'uploads/Screenshot 2024-10-07 033159.png'),
-(14, 'test 3', 23, 'fdsfd', 'fadfds', 'fadsfs', 'uploads/Screenshot 2024-10-07 033159.png'),
-(15, 'Raj', 23, 'acdfs', 'sdaf', 'asdf', 'uploads/Screenshot 2024-10-07 002851.png'),
-(17, 'Djajkdfreg', 32, 'fewgre', 'rweg', '432rewg', 'Screenshot 2024-10-07 002851.png'),
-(18, 'afgdag', 79, 'fghj', 'dfghn', '4567', 'Screenshot 2024-10-07 002851.png'),
-(19, 'test', 67, 'dfbnj', 'fyhjk', 'bhjok', 'bg2_app.png');
+(3, 'Om Moholkar', 20, 'Juinagar', 'omoholkar', '1234', 'uploads/employee1.jpeg'),
+(6, 'Shital Prajapati', 32, 'Kamothe', 'shital', '876', 'uploads/employee5.jpeg'),
+(14, 'Avdhut Rokade ', 27, 'Dombivili', 'avdhut@123', '5944', 'uploads/employee2.jpeg\r\n'),
+(16, 'Pawan Jamkhande', 26, 'Vashi', 'pawan@123', '234', 'uploads/employee3.jpeg'),
+(18, 'Shrihari Mane', 34, 'Sion', 'shri@123', '343', 'uploads/employee1.jpeg'),
+(19, 'Deesha Patel', 33, 'Kharghar', 'disha@132', '343', 'uploads/employee5.jpeg'),
+(20, 'Mandar Mawale', 44, 'Bandra ', 'mandar@123', '232', 'uploads/employee2.jpeg');
 
 -- --------------------------------------------------------
 
@@ -105,9 +97,9 @@ CREATE TABLE `tour_plans` (
 --
 
 INSERT INTO `tour_plans` (`id`, `employee_id`, `doctor_list`, `submitted_at`) VALUES
-(1, 12, '[{\"dr_area\":\"Kharghar\",\"dr_name\":\"Dr. Manjusha Deshmukh\",\"dr_specialization\":\"BrainFucking\"},{\"dr_area\":\"ytrer\",\"dr_name\":\"Dr. Hello\",\"dr_specialization\":\"dum di dumm dumm\"}]', '2024-10-20 11:32:00'),
-(2, 4, '[{\"dr_area\":\"Kharghar\",\"dr_name\":\"Dr. Manjusha Deshmukh\",\"dr_specialization\":\"BrainFucking\"},{\"dr_area\":\"helo\",\"dr_name\":\"Dr. Om Moholkar\",\"dr_specialization\":\"hello\"},{\"dr_area\":\"Kamothe\",\"dr_name\":\"Shital Prajapati\",\"dr_specialization\":\"Gynac\"},{\"dr_area\":\"ytrer\",\"dr_name\":\"Dr. Hello\",\"dr_specialization\":\"dum di dumm dumm\"}]', '2024-10-20 12:00:56'),
-(3, 4, '[{\"dr_area\":\"Vashi\",\"dr_name\":\"Pawan \",\"dr_specialization\":\"Orthopedic\"},{\"dr_area\":\"Kamothe\",\"dr_name\":\"Shital Prajapati\",\"dr_specialization\":\"Gynac\"},{\"dr_area\":\"Kharghar\",\"dr_name\":\"Dr. Manjusha Deshmukh\",\"dr_specialization\":\"BrainFucking\"},{\"dr_area\":\"helo\",\"dr_name\":\"Dr. Om Moholkar\",\"dr_specialization\":\"hello\"},{\"dr_area\":\"ytrer\",\"dr_name\":\"Dr. Hello\",\"dr_specialization\":\"dum di dumm dumm\"}]', '2024-10-20 13:26:01');
+(2, 3, '[{\"dr_area\":\"Kamothe\",\"dr_name\":\"Dr. Shital Prajapati\",\"dr_specialization\":\"Gynaecologist\"},{\"dr_area\":\"Vashi\",\"dr_name\":\"Dr. Pawan Jamkhande\",\"dr_specialization\":\"Orthopedist\"},{\"dr_area\":\"Taloja\",\"dr_name\":\"Dr. Sharmeen Khan\",\"dr_specialization\":\"Child Speacialist \"}]', '2024-10-22 19:58:56'),
+(3, 6, '[{\"dr_area\":\"Juinagar\",\"dr_name\":\"Dr. Om Moholkar\",\"dr_specialization\":\"Cardiologist \"},{\"dr_area\":\"Sion\",\"dr_name\":\"Dr. Shrihari Mane\",\"dr_specialization\":\"Dermatologist\"},{\"dr_area\":\"Dombivili\",\"dr_name\":\"Dr. Avdhut Rokade\",\"dr_specialization\":\"Family Physician\"},{\"dr_area\":\"Vashi\",\"dr_name\":\"Dr. Pawan Jamkhande\",\"dr_specialization\":\"Orthopedist\"}]', '2024-10-22 19:59:49'),
+(4, 14, '[{\"dr_area\":\"Vashi\",\"dr_name\":\"Dr. Pawan Jamkhande\",\"dr_specialization\":\"Orthopedist\"},{\"dr_area\":\"Taloja\",\"dr_name\":\"Dr. Sharmeen Khan\",\"dr_specialization\":\"Child Speacialist \"},{\"dr_area\":\"Kamothe\",\"dr_name\":\"Dr. Shital Prajapati\",\"dr_specialization\":\"Gynaecologist\"}]', '2024-10-22 20:00:43');
 
 --
 -- Indexes for dumped tables
@@ -117,8 +109,7 @@ INSERT INTO `tour_plans` (`id`, `employee_id`, `doctor_list`, `submitted_at`) VA
 -- Indexes for table `doctor`
 --
 ALTER TABLE `doctor`
-  ADD PRIMARY KEY (`dr_id`),
-  ADD UNIQUE KEY `dr_id` (`dr_id`);
+  ADD PRIMARY KEY (`dr_id`);
 
 --
 -- Indexes for table `employee`
@@ -130,8 +121,7 @@ ALTER TABLE `employee`
 -- Indexes for table `tour_plans`
 --
 ALTER TABLE `tour_plans`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_employee` (`employee_id`);
+  ADD UNIQUE KEY `id` (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -141,29 +131,19 @@ ALTER TABLE `tour_plans`
 -- AUTO_INCREMENT for table `doctor`
 --
 ALTER TABLE `doctor`
-  MODIFY `dr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `dr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tour_plans`
 --
 ALTER TABLE `tour_plans`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `tour_plans`
---
-ALTER TABLE `tour_plans`
-  ADD CONSTRAINT `fk_employee` FOREIGN KEY (`employee_id`) REFERENCES `employee` (`id`) ON DELETE CASCADE;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

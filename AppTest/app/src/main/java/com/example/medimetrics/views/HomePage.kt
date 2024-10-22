@@ -130,7 +130,7 @@ fun ProfileSection(employee: Employee) {
 
         Column(modifier = Modifier.padding(12.dp)) {
             Text(text = "Welcome back,", fontSize = 18.sp)
-            Text(text = "${employee.name}!", fontWeight = FontWeight.Bold, fontSize = 34.sp)
+            Text(text = "${employee.name} !", fontWeight = FontWeight.Bold, fontSize = 34.sp)
             Text(text = "${employee.area} · Medical Representative", fontSize = 14.sp)
         }
 
