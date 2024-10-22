@@ -150,7 +150,7 @@ const EmployeeList = () => {
                 <div className="form-overlay">
                     <div className="overlay-content" ref={overlayRef}>
                         <EmployeeForm />
-                        <button className="close-btn" onClick={toggleForm}>Close</button>
+                        {/* <button className="close-btn" onClick={toggleForm}>Close</button> */}
                     </div>
                 </div>
             )}

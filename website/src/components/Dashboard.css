@@ -46,7 +46,9 @@ body {
     color: #403c3c;
     cursor: pointer;
     margin-top: 20px;
-    
+   
+    border-radius: 20px;
+    box-shadow: #333;
 }
 
 .sidebar ul li.active,
