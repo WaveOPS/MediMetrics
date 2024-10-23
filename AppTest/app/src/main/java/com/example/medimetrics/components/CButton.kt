@@ -24,7 +24,7 @@ fun CButton(
         onClick = onClick,
         shape = MaterialTheme.shapes.large,
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFF7C9A92)
+            containerColor = Color(0xFF0D4D7A)
         ),
         modifier = Modifier
             .fillMaxWidth()

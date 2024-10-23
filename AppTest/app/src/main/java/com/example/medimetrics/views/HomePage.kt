@@ -23,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
@@ -32,6 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.medimetrics.R
 import com.example.medimetrics.data.model.Employee
 import com.example.medimetrics.ui.theme.MediMetricsTheme
@@ -56,21 +58,21 @@ fun HomeScreen(
                 .padding(10.dp)
         ) {
             // Header Section
-            Spacer(modifier = Modifier.height(35.dp))
+            Spacer(modifier = Modifier.height(40.dp))
 
             AppHeader()
 
-            Spacer(modifier = Modifier.height(5.dp))
+            Spacer(modifier = Modifier.weight(1f))
 
             // Profile Section
             ProfileSection(employee = employee)
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.weight(1f))
 
             // Weekly Calls Card
             MonthlyCallsCard()
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.weight(1f))
 
             // Dashboard Icons
             DashboardIcons(
@@ -78,7 +80,7 @@ fun HomeScreen(
                 employee = employee
                 )
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.weight(1f))
 
             // Bottom Section (Current Visit Info)
             CurrentVisitBar()
@@ -99,7 +101,7 @@ fun AppHeader() {
     ) {
         // App Name Logo
         Image(
-            painter = painterResource(id = R.drawable.medimetrics_logo),
+            painter = painterResource(id = R.drawable.medimetircs_final),
             contentDescription = null,
             modifier = Modifier
                 .height(48.dp)
@@ -126,9 +128,9 @@ fun ProfileSection(employee: Employee) {
         modifier = Modifier.fillMaxWidth(),
     ) {
 
-        Column {
+        Column(modifier = Modifier.padding(12.dp)) {
             Text(text = "Welcome back,", fontSize = 18.sp)
-            Text(text = "${employee.name}!", fontWeight = FontWeight.Bold, fontSize = 34.sp)
+            Text(text = "${employee.name} !", fontWeight = FontWeight.Bold, fontSize = 34.sp)
             Text(text = "${employee.area} · Medical Representative", fontSize = 14.sp)
         }
 
@@ -150,20 +152,23 @@ fun ProfileSection(employee: Employee) {
 @Composable
 fun MonthlyCallsCard() {
     Card(
-        colors = CardDefaults.cardColors(Color(0xFFF3AFAF)),
+        colors = CardDefaults.cardColors(Color(0xFFAFD6F3)),
         modifier = Modifier
             .fillMaxWidth()
-            .height(70.dp),
+//            .height(70.dp)
+        ,
         elevation = CardDefaults.cardElevation(8.dp)
     ) {
         Row(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier
+                .padding(10.dp)
+            ,
             verticalAlignment = CenterVertically,
 
             ) {
             Text(
                 text = "January",
-                color = Color.White,
+                color = Color.Black,
                 fontWeight = FontWeight.Bold,
                 fontSize = 25.sp,
                 modifier = Modifier.padding(start = 10.dp)
@@ -171,13 +176,13 @@ fun MonthlyCallsCard() {
             Spacer(modifier = Modifier.weight(1f))
             Text(
                 text = "12",
-                color = Color.White,
+                color = Color.Black,
                 fontSize = 36.sp,
                 fontWeight = FontWeight.Bold
             )
             Text(
                 text = "Calls Completed",
-                color = Color.White,
+                color = Color.Black,
                 fontSize = 12.sp,
                 modifier = Modifier.padding(start = 1.dp)
             )
@@ -195,13 +200,12 @@ fun DashboardIcons(
         verticalArrangement = Arrangement.Center
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().padding(10.dp),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             DashboardCardItem(
                 iconRes = R.drawable.planner_icon,
                 label = "Tour Planner",
-                backgroundColor = Color(0xFFB3E5FC),
                 onClick = {
                     println("Navigating to Tour Planner with employeeId: ${employee.id}")
                     navController.navigate("tourPlanner/${employee.id}")  }
@@ -209,7 +213,6 @@ fun DashboardIcons(
             DashboardCardItem(
                 iconRes = R.drawable.selfie_icon,
                 label = "Selfie",
-                backgroundColor = Color(0xFFE0E0E0),
                 onClick = { }
             )
         }
@@ -223,13 +226,11 @@ fun DashboardIcons(
             DashboardCardItem(
                 iconRes = R.drawable.select_icon,
                 label = "Select Call",
-                backgroundColor = Color(0xFFFFF59D),
                 onClick = { /* Handle click for Select Call */ }
             )
             DashboardCardItem(
                 iconRes = R.drawable.dvl_icon,
                 label = "DVL",
-                backgroundColor = Color(0xFFD1C4E9),
                 onClick = { /* Handle click for DVL */ }
             )
         }
@@ -243,13 +244,11 @@ fun DashboardIcons(
             DashboardCardItem(
                 iconRes = R.drawable.doctor_icon,
                 label = "Doctor Details",
-                backgroundColor = Color(0xFFB2EBF2),
                 onClick = { /* Handle click for Doctor Details */ }
             )
             DashboardCardItem(
                 iconRes = R.drawable.notes_icon,
                 label = "Notes",
-                backgroundColor = Color(0xFFFFCC80),
                 onClick = { /* Handle click for Other */ }
             )
         }
@@ -257,13 +256,13 @@ fun DashboardIcons(
 }
 
 @Composable
-fun DashboardCardItem(iconRes: Int, label: String, backgroundColor: Color, onClick: () -> Unit) {
+fun DashboardCardItem(iconRes: Int, label: String, backgroundColor: Color = Color(0xFFE1EBFF), onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .size(140.dp) // Same size for each card
             .clickable { onClick() },
         colors = CardDefaults.cardColors(backgroundColor),
-        elevation = CardDefaults.cardElevation(10.dp)
+        elevation = CardDefaults.cardElevation(40.dp)
     ) {
         Column(
             modifier = Modifier
@@ -293,7 +292,7 @@ fun DashboardCardItem(iconRes: Int, label: String, backgroundColor: Color, onCli
 @Composable
 fun CurrentVisitBar() {
     Card(
-        colors = CardDefaults.cardColors(Color(0xFFFF5C5C)),
+        colors = CardDefaults.cardColors(Color(0xFF0D4D7A)),
 //        backgroundColor = Color(0xFFFF5C5C),
         modifier = Modifier
             .fillMaxWidth()
@@ -334,7 +333,10 @@ fun CurrentVisitBar() {
 @Composable
 fun MainScreenPreview() {
     MediMetricsTheme {
-//        HomeScreen()
+        HomeScreen(
+            employee = Employee(23,"jane","ahdfh","jfahf"),
+            navController = rememberNavController()
+        )
     }
 
 }

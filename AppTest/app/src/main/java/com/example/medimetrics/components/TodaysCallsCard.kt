@@ -25,7 +25,7 @@ fun TodayCallsCard() {
         modifier = Modifier
             .fillMaxWidth()
             .height(100.dp),
-        colors = CardDefaults.cardColors(Color(0xFFF05454)),
+        colors = CardDefaults.cardColors(Color(0xFF0D4D7A)),
         shape = RoundedCornerShape(8.dp)
     ) {
         Row(
@@ -42,7 +42,7 @@ fun TodayCallsCard() {
             )
             Spacer(modifier = Modifier.weight(1f))
             Text(
-                text = "3",
+                text = "10",
                 color = Color.White,
                 fontSize = 36.sp,
                 fontWeight = FontWeight.Bold
