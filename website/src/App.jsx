@@ -8,6 +8,7 @@ import DoctorForm from './components/DoctorForm';
 import Sidebar from './components/Sidebar';
 import EmployeeForm from './components/EmployeeForm';
 import DoctorList from './components/DoctorList';
+import DailyReports from './components/DailyReports'; // Import the DailyReports component
 
 const App = () => {
     // Initialize authentication state from localStorage
@@ -52,6 +53,11 @@ const App = () => {
                         <Route 
                             path="/doctorform" 
                             element={isAuthenticated ? <DoctorForm /> : <Navigate to="/" />} 
+                        />
+                        {/* Add Daily Reports route */}
+                        <Route 
+                            path="/daily-reports" 
+                            element={isAuthenticated ? <DailyReports /> : <Navigate to="/" />} 
                         />
                     </Routes>
                 </div>
