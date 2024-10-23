@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import LocationPicker from './LocationPicker'; // Import the LocationPicker component
 import './DoctorForm.css';
-import './LocationPicker.css'; // Import CSS for LocationPicker if necessary
 
 function AddDoctorForm() {
   const [doctorData, setDoctorData] = useState({
@@ -13,9 +11,8 @@ function AddDoctorForm() {
     photo: null,
   });
 
-  const [selectedLat, setSelectedLat] = useState(null);
-  const [selectedLng, setSelectedLng] = useState(null);
-  const [isMapVisible, setIsMapVisible] = useState(false); // State to control map visibility
+  const [selectedLat, setSelectedLat] = useState('');
+  const [selectedLng, setSelectedLng] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,16 +27,6 @@ function AddDoctorForm() {
       ...doctorData,
       photo: e.target.files[0],
     });
-  };
-
-  const handleLocationSelect = (lat, lng) => {
-    setSelectedLat(lat);
-    setSelectedLng(lng);
-    setIsMapVisible(false); // Hide the map after selection
-  };
-
-  const handleMapToggle = () => {
-    setIsMapVisible(!isMapVisible); // Toggle map visibility
   };
 
   const handleSubmit = (e) => {
@@ -67,7 +54,6 @@ function AddDoctorForm() {
 
   return (
     <form className="doctor-form" onSubmit={handleSubmit}>
-      {/* <h2>Doctor Form</h2> */}
       <div className="form-group">
         <label>Full Name:</label>
         <input
@@ -111,27 +97,26 @@ function AddDoctorForm() {
       </div>
 
       <div className="form-group">
-        <label>Choose Location:</label>
-        <button type="button" onClick={handleMapToggle}>
-          {isMapVisible ? 'Hide Map' : 'Select Location'}
-        </button>
+        <label>Latitude:</label>
+        <input
+          type="number"
+          step="any"
+          value={selectedLat}
+          onChange={(e) => setSelectedLat(e.target.value)}
+          required
+        />
       </div>
 
-      {/* Show the map when isMapVisible is true */}
-      {isMapVisible && (
-        <div className="map-container">
-          <LocationPicker onLocationSelect={handleLocationSelect} />
-        </div>
-      )}
-
-      {/* Display the selected latitude and longitude below */}
-      {selectedLat !== null && selectedLng !== null && (
-        <div className="location-display">
-          <p>Selected Location:</p>
-          <p>Latitude: {selectedLat}</p>
-          <p>Longitude: {selectedLng}</p>
-        </div>
-      )}
+      <div className="form-group">
+        <label>Longitude:</label>
+        <input
+          type="number"
+          step="any"
+          value={selectedLng}
+          onChange={(e) => setSelectedLng(e.target.value)}
+          required
+        />
+      </div>
 
       <div className="form-group">
         <label>Photo:</label>
@@ -141,6 +126,7 @@ function AddDoctorForm() {
           onChange={handleFileChange}
         />
       </div>
+
       <button type="submit">Add Doctor</button>
     </form>
   );
