@@ -35,7 +35,7 @@ body {
     list-style: none;
     padding: 0;
     margin-top: 20px;
-    
+    color:#3a7bd5;
     
 }
 
@@ -49,9 +49,14 @@ body {
    
     border-radius: 20px;
     box-shadow: #333;
+    color:#3a7bd5;
 }
 
-.sidebar ul li.active,
+.sidebar ul li.active{
+    color:#3a7bd5;
+
+
+}
 .sidebar ul li:hover {
     background-color: #f1f1f1;
     border-radius: 8px;
@@ -60,6 +65,7 @@ body {
 
 .sidebar ul li i {
     margin-right: 50px;
+    color:#3a7bd5;
     
 }
 
