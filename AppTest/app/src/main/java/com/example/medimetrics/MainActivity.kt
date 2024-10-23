@@ -19,6 +19,7 @@ import androidx.navigation.navArgument
 import com.example.medimetrics.data.model.Employee
 import com.example.medimetrics.ui.theme.MediMetricsTheme
 import com.example.medimetrics.viewmodel.TourPlannerViewModel
+import com.example.medimetrics.views.CompleteVIsitScreen
 import com.example.medimetrics.views.HomeScreen
 import com.example.medimetrics.views.LoginScreen
 import com.example.medimetrics.views.DoctorList
@@ -105,6 +106,12 @@ fun MyApp() {
 
         composable("doctorList") {
             DoctorList(navController = navController, viewModel = tourPlannerViewModel)
+        }
+
+        composable("completeVisit") {
+            CompleteVIsitScreen(
+                employee = Employee(23,"Dr. Pawan Jamkhande","Vashi","")
+            )
         }
     }
 }

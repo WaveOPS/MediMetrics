@@ -1,6 +1,7 @@
 package com.example.medimetrics.views
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -20,29 +21,55 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.medimetrics.GeofenceHelper
 import com.example.medimetrics.R
 import com.example.medimetrics.data.model.Employee
 import com.example.medimetrics.ui.theme.MediMetricsTheme
+import com.example.medimetrics.viewmodel.HomeViewModel
+import com.google.android.gms.location.LocationServices
 
 @Composable
 fun HomeScreen(
     employee: com.example.medimetrics.data.model.Employee,
     navController: NavController
 ) {
+
+    val viewModel: HomeViewModel = viewModel()
+    val context = LocalContext.current
+    val geofenceClient = LocationServices.getGeofencingClient(context)
+    val geofenceHelper = GeofenceHelper(context, geofenceClient)
+
+    // Initialize geofence
+    LaunchedEffect(Unit) {
+        geofenceHelper.createGeofence(
+            geoId = "doctorVisit",
+            latitude = 37.421937, // Example coordinates
+            longitude = -122.084063,
+            radius = 2000f
+        )
+    }
+
+    val isInsideGeofence by viewModel.isInsideGeofence.collectAsState()
+
     Log.d("HomeScreen", "Homescreen")
     Box(Modifier.fillMaxSize()) {
         Image(
@@ -83,7 +110,10 @@ fun HomeScreen(
             Spacer(modifier = Modifier.weight(1f))
 
             // Bottom Section (Current Visit Info)
-            CurrentVisitBar()
+            CurrentVisitBar(
+                isInsideGeofence,
+                navController
+            )
 
             Spacer(modifier = Modifier.height(10.dp))
         }
@@ -290,14 +320,28 @@ fun DashboardCardItem(iconRes: Int, label: String, backgroundColor: Color = Colo
 
 
 @Composable
-fun CurrentVisitBar() {
+fun CurrentVisitBar(
+    isInsideGeofence: Boolean,
+    navController: NavController
+) {
+    val context = LocalContext.current
+
     Card(
         colors = CardDefaults.cardColors(Color(0xFF0D4D7A)),
 //        backgroundColor = Color(0xFFFF5C5C),
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 10.dp)
-            .height(80.dp),
+            .height(80.dp)
+            .clickable {
+
+                if (!isInsideGeofence) {
+                    Toast.makeText(context, "Current Visit Started!", Toast.LENGTH_SHORT).show()
+                    navController.navigate("completeVisit")
+                } else {
+                    Toast.makeText(context, "Please reach the location to start the visit.", Toast.LENGTH_SHORT).show()
+                }
+            },
         elevation = CardDefaults.cardElevation(10.dp)
 
     ) {
