@@ -101,7 +101,7 @@
   background-color: white;
   padding: 20px;
   border-radius: 8px;
-  height: 480px;
+  height: flex;
   width: 450px;  /* Adjust width of the form container inside the overlay */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slight shadow for the form container */
   position: relative;  /* For close button positioning */
