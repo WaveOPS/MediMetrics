@@ -54,8 +54,6 @@ The system includes:
 
 ## 📱 Screenshots
 
-> Replace these with actual screenshots or remove this section.
-
 | MR App |
 |--------|
 | ![App Login](https://github.com/WaveOPS/MediMetrics/blob/main/database/AppSS.png) |
