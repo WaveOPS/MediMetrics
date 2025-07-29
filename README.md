@@ -1,5 +1,5 @@
 ![Logo](https://github.com/OmMoholkar/MediMetrics/blob/main/database/MediMetircs%20(1).png)
-## Geofencing-based MR Reporting App
+# Geofencing-based MR Reporting App
 
 A mobile + web application designed to revolutionize how pharmaceutical companies manage Medical Representatives (MRs) using geofencing technology, real-time dashboards, and automation.
 
@@ -110,6 +110,6 @@ npm run dev
 
 ## 👨‍💻 Authors
 
-- [Om Moholkar](https://github.com/OmMoholkar)
-- [Pawan Jamkhande](https://github.com/PawanJamkhande) <!-- Replace with correct GitHub if available -->
 - [Shital Prajapati](https://github.com/Shital2005)
+- [Om Moholkar](https://github.com/OmMoholkar)
+- [Pawan Jamkhande](https://github.com/PawanJamkhande)
