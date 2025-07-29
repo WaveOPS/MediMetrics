@@ -50,7 +50,7 @@ The system includes:
 - MySQL database
 - Geofencing logic (app-side)
 
-![Workflow](https://github.com/OmMoholkar/MediMetrics/blob/main/docs/workflow-diagram.png) *(optional)*
+![Workflow](https://github.com/WaveOPS/MediMetrics/blob/main/database/Features%20Diagram.png) 
 
 ## 📱 Screenshots
 
