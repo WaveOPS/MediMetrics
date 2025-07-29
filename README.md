@@ -1,4 +1,5 @@
-# MediMetrics - Geofencing-based MR Reporting App
+![Logo](https://github.com/OmMoholkar/MediMetrics/blob/main/database/MediMetircs%20(1).png)
+## Geofencing-based MR Reporting App
 
 A mobile + web application designed to revolutionize how pharmaceutical companies manage Medical Representatives (MRs) using geofencing technology, real-time dashboards, and automation.
 
