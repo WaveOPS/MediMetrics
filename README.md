@@ -31,7 +31,7 @@ This was developed as part of a mini project for the **Bachelor of Engineering (
 
 ## ⚙️ Tech Stack
 
-| Layer             | Tech Used                       |
+| Layer             | Tech Used                      |
 |------------------|---------------------------------|
 | Android App      | Kotlin, Jetpack Compose         |
 | Web Dashboard    | React.js                        |
@@ -63,69 +63,52 @@ The system includes:
 
 ### 1. Clone the Repository
 
+```
 git clone https://github.com/OmMoholkar/MediMetrics.git
 cd MediMetrics
+```
 
-###2. Android App
-Open android-app folder in Android Studio
+### 2. Android App
 
-Connect to an emulator/device
+- Open **AppTest** folder in Android Studio
+- Connect to an emulator/device
+- Run the app
 
-Run the app
+### 3. Web Dashboard
 
-###3. Web Dashboard
-Install dependencies:
-
-bash
-Copy
-Edit
+- Install dependencies:
+```
 cd web-dashboard
 npm install
-Start development server:
+```
 
-bash
-Copy
-Edit
+- Start development server:
+
+```
 npm run dev
-4. Backend API (PHP)
-Place PHP files in an Apache/XAMPP server environment
+```
 
-Create MySQL DB using the provided medimetrics_db.sql
+### 4. Backend API (PHP)
 
-Configure database credentials in config.php
+- Place PHP files in an Apache/XAMPP server environment
+- Create MySQL DB using the provided medimetrics_db.sql
+- Configure database credentials in config.php
 
-🧪 Testing
-Simulate tour plan → doctor selection → enter geofence → feedback → view admin dashboard updates
+## 🧪 Testing
 
-Use GPS mocking tools for accurate testing
+- Simulate tour plan → doctor selection → enter geofence → feedback → view admin dashboard updates
+- Use GPS mocking tools for accurate testing
 
-📈 Results (Summary)
-Improved real-time visibility into MR activity
+## 📈 Results (Summary)
 
-Prevented false reporting via geofencing lock
+- Improved real-time visibility into MR activity
+- Prevented false reporting via geofencing lock
+- Automated full-day/half-day attendance
+- Easy rescheduling of doctor visits
+- High user satisfaction among test group
 
-Automated full-day/half-day attendance
+## 👨‍💻 Authors
 
-Easy rescheduling of doctor visits
-
-High user satisfaction among test group
-
-🧩 Future Enhancements
-📶 Offline support for low-connectivity areas
-
-☁️ Cloud database integration (Firebase/Cloud SQL)
-
-🤖 AI-based performance analytics
-
-🔒 GDPR-compliant security and data encryption
-
-🧠 CRM integration for broader sales insights
-
-👨‍💻 Authors
-Om Moholkar
-
-Pawan Jamkhande
-
-Shital Prajapati
-      
-Project Guide: Dr. Sujata Bhairnallaykar
+- [Om Moholkar](https://github.com/OmMoholkar)
+- [Pawan Jamkhande](https://github.com/PawanJamkhande) <!-- Replace with correct GitHub if available -->
+- [Shital Prajapati](https://github.com/Shital2005)
