@@ -56,9 +56,9 @@ The system includes:
 
 > Replace these with actual screenshots or remove this section.
 
-| MR App | Admin Dashboard |
-|--------|------------------|
-| ![App Login](docs/app-login.png) | ![Dashboard](docs/admin-dashboard.png) |
+| MR App |
+|--------|
+| ![App Login](https://github.com/WaveOPS/MediMetrics/blob/main/database/AppSS.png) |
 
 ## 🛠️ Setup Instructions
 
@@ -79,7 +79,7 @@ cd MediMetrics
 
 - Install dependencies:
 ```
-cd web-dashboard
+cd website
 npm install
 ```
 
